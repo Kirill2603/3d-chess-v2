@@ -7,6 +7,7 @@ import { Knight } from './components/figures/Knight'
 import { Pawn } from './components/figures/Pawn'
 import { Queen } from './components/figures/Queen'
 import { Rook } from './components/figures/Rook'
+import { Board } from './components/Board'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Pawn />
         <Queen />
         <Rook />
+        <Board/>
       </Canvas>
   )
 }
