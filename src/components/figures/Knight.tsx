@@ -15,7 +15,7 @@ export const Knight: FC<FiguresPropsType> = ({ id, position, color }): JSX.Eleme
   const { nodes } = useGLTF('figures/knight.gltf') as GLTFResult
   return (
 
-    <group position={position} scale={[0.3, 0.3, 0.3]}>
+    <group position={position} scale={[0.3, 0.3, 0.3]} >
       <mesh
         castShadow
         receiveShadow
