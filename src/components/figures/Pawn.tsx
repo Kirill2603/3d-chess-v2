@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { FiguresPropsType } from './types'
+import { ThreeEvent } from '@react-three/fiber'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -10,19 +11,27 @@ type GLTFResult = GLTF & {
   }
 };
 
-export const Pawn: FC<FiguresPropsType> = ({ id, position, color }): JSX.Element => {
+export const Pawn: FC<FiguresPropsType> = ({ id, position, color,onFigureSelect }): JSX.Element => {
 
   const { nodes } = useGLTF('figures/pawn.gltf') as GLTFResult
+
+  const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
+    onFigureSelect(id)
+  }
+
   return (
 
-    <group position={position} scale={[0.3, 0.3, 0.3]}>
+    <group
+      onClick={onFigureClick}
+      position={position}
+      scale={[0.3, 0.3, 0.3]}>
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Cylinder.geometry}
         material={nodes.Cylinder.material}
       >
-        <meshPhysicalMaterial color={color}/>
+        <meshPhysicalMaterial color={color} />
       </mesh>
 
     </group>

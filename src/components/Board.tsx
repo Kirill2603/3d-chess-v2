@@ -17,7 +17,7 @@ export const Board: FC<BoardPropsType> = ({board}) => {
   return (
     <>
       {board.map(cell =>
-        <Cell key={cell.id} position={cell.position} color={cell.color} />,
+        <Cell key={cell.id} position={cell.position} color={cell.color}/>,
       )}
     </>
   )
