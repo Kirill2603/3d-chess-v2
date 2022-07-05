@@ -128,6 +128,8 @@ export const movesSlice = createSlice({
         const filteredMoves = moves.filter((arr) => {
           if (!((arr[0] < 0 || arr[2] < 0) || (arr[0] >= 8 || arr[2] >= 8))) {
             return arr
+          } else {
+            return false
           }
         })
 
