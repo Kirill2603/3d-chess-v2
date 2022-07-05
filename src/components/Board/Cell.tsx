@@ -1,12 +1,11 @@
 import React, { FC } from 'react'
-import { Vector3 } from 'three'
 
 type CellPropsType = {
-  position: Vector3
-  color: 'white' | 'black'
+  position: [number, number, number]
+  color: 'white' | 'black' | 'green'
 }
 
-const Cell: FC<CellPropsType> = ({color, position}) => {
+export const Cell: FC<CellPropsType> = ({color, position}) => {
   return (
     <mesh
       scale={[1, 1, 0.1]}
@@ -17,5 +16,3 @@ const Cell: FC<CellPropsType> = ({color, position}) => {
     </mesh>
   )
 }
-
-export default Cell

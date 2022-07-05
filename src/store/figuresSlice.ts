@@ -1,4 +1,3 @@
-import { Vector3 } from '@react-three/fiber'
 import { Pawn } from '../components/figures/Pawn'
 import { createSlice } from '@reduxjs/toolkit'
 import { FiguresPropsType } from '../components/figures/types'
@@ -10,7 +9,7 @@ import { King } from '../components/figures/King'
 
 export type FiguresType = {
   id: string,
-  position: Vector3
+  position: [number, number, number]
   color: 'white' | 'black',
   Figure: (props: FiguresPropsType) => JSX.Element | null
 }

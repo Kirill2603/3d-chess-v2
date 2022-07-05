@@ -4,6 +4,8 @@ import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { FiguresPropsType } from './types'
 import { ThreeEvent } from '@react-three/fiber'
+import { useAppDispatch } from '../../store/store'
+import { getAvailableMoves } from '../../store/movesSlice'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -11,12 +13,13 @@ type GLTFResult = GLTF & {
   }
 };
 
-export const Pawn: FC<FiguresPropsType> = ({ id, position, color,onFigureSelect }): JSX.Element => {
+export const Pawn: FC<FiguresPropsType> = ({ id, position, color, onFigureSelect }): JSX.Element => {
+
 
   const { nodes } = useGLTF('figures/pawn.gltf') as GLTFResult
 
   const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
-    onFigureSelect(id)
+    onFigureSelect(id, position)
   }
 
   return (

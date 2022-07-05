@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { resetMoves } from './movesSlice'
+import { useAppDispatch } from './store'
 
 type initialStateType = {
   id: string | null
@@ -13,11 +15,9 @@ export const selectedSlice = createSlice({
   initialState,
   reducers: {
     selectFigure: (state, action: PayloadAction<string>) => {
-      if (state.id === action.payload) {
-        state.id = null
-      } else {
+
         state.id = action.payload
-      }
+
     },
   },
 })

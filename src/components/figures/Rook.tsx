@@ -16,7 +16,7 @@ export const Rook: FC<FiguresPropsType> = ({ id, position, color, onFigureSelect
   const { nodes } = useGLTF('figures/rook.gltf') as GLTFResult
 
   const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
-    onFigureSelect(id)
+    onFigureSelect(id, position)
   }
 
   return (

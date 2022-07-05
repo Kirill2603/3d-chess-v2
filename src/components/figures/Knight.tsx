@@ -16,7 +16,7 @@ export const Knight: FC<FiguresPropsType> = ({ id, position, color, onFigureSele
   const { nodes } = useGLTF('figures/knight.gltf') as GLTFResult
 
   const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
-    onFigureSelect(id)
+    onFigureSelect(id, position)
   }
 
   return (
