@@ -126,9 +126,9 @@ export const movesSlice = createSlice({
           [x + 2, y, z - 1]]
 
         const filteredMoves = moves.filter((arr) => {
-          if((arr[0] < 0 || arr[2] < 0 ) || (arr[0] >= 8 || arr[2] >= 8 )) {
-            return
-          } else return arr
+          if (!((arr[0] < 0 || arr[2] < 0) || (arr[0] >= 8 || arr[2] >= 8))) {
+            return arr
+          }
         })
 
         state.availableMoves.push(...filteredMoves)
