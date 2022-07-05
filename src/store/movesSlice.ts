@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Pawn } from '../components/figures/Pawn'
-
 type AvailableMovesType = {
   availableMoves: Array<[number, number, number]>
 }

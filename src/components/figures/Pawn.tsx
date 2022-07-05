@@ -4,8 +4,6 @@ import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { FiguresPropsType } from './types'
 import { ThreeEvent } from '@react-three/fiber'
-import { useAppDispatch } from '../../store/store'
-import { getAvailableMoves } from '../../store/movesSlice'
 
 type GLTFResult = GLTF & {
   nodes: {
