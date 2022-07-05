@@ -56,33 +56,83 @@ export const movesSlice = createSlice({
       //
       if (action.payload.id && action.payload.id.includes('Rook')) {
         let i = 1
-        while ((x+i)<8 && (z+i)<8) {
+        while ((x + i) < 8 && (z + i) < 8) {
           state.availableMoves.push([x + i, y, z + i])
           i++
         }
         i = 1
-        while ((x-i)>=0 && (z-i)>=0) {
+        while ((x - i) >= 0 && (z - i) >= 0) {
           state.availableMoves.push([x - i, y, z - i])
           i++
         }
         i = 1
-        while ((x+i)<8 && (z-i)>=0) {
+        while ((x + i) < 8 && (z - i) >= 0) {
           state.availableMoves.push([x + i, y, z - i])
           i++
         }
-        while ((x-i)>=0 && (z+i)<8) {
+        while ((x - i) >= 0 && (z + i) < 8) {
           state.availableMoves.push([x - i, y, z + i])
           i++
         }
       }
       //
-      // if (action.payload.id.includes('Queen')) {
-      //   console.log('Queen', 'position:', action.payload.position, 'color', action.payload.id[0])
-      // }
-      //
-      // if (action.payload.id.includes('Knight')) {
-      //   console.log('Knight', 'position:', action.payload.position, 'color', action.payload.id[0])
-      // }
+      if (action.payload.id && action.payload.id.includes('Queen')) {
+        let i = 1
+        while (i !== 8) {
+          if (!((x + i) >= 8)) {
+            state.availableMoves.push([x + i, y, z])
+          }
+          if (!((z + i) >= 8)) {
+            state.availableMoves.push([x, y, z + i])
+          }
+          if (!((x - i) < 0)) {
+            state.availableMoves.push([x - i, y, z])
+          }
+          if (!((z - i) < 0)) {
+            state.availableMoves.push([x, y, z - i])
+          }
+          i++
+        }
+        i = 1
+        while ((x + i) < 8 && (z + i) < 8) {
+          state.availableMoves.push([x + i, y, z + i])
+          i++
+        }
+        i = 1
+        while ((x - i) >= 0 && (z - i) >= 0) {
+          state.availableMoves.push([x - i, y, z - i])
+          i++
+        }
+        i = 1
+        while ((x + i) < 8 && (z - i) >= 0) {
+          state.availableMoves.push([x + i, y, z - i])
+          i++
+        }
+        while ((x - i) >= 0 && (z + i) < 8) {
+          state.availableMoves.push([x - i, y, z + i])
+          i++
+        }
+      }
+
+      if (action.payload.id && action.payload.id.includes('Knight')) {
+        const moves: Array<[number, number, number]> = [
+          [x + 2, y, z + 1],
+          [x + 1, y, z + 2],
+          [x - 1, y, z - 2],
+          [x - 2, y, z - 1],
+          [x - 2, y, z + 1],
+          [x + 1, y, z - 2],
+          [x - 1, y, z + 2],
+          [x + 2, y, z - 1]]
+
+        const filteredMoves = moves.filter((arr) => {
+          if((arr[0] < 0 || arr[2] < 0 ) || (arr[0] >= 8 || arr[2] >= 8 )) {
+            return
+          } else return arr
+        })
+
+        state.availableMoves.push(...filteredMoves)
+      }
     },
     resetMoves: (state) => {
       state.availableMoves = []
