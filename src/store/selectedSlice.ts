@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { resetMoves } from './movesSlice'
-import { useAppDispatch } from './store'
 
 type initialStateType = {
   id: string | null
