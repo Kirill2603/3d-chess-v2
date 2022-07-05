@@ -1,5 +1,5 @@
 import { Pawn } from '../components/figures/Pawn'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FiguresPropsType } from '../components/figures/types'
 import { Castle } from '../components/figures/Castle'
 import { Knight } from '../components/figures/Knight'
@@ -54,9 +54,11 @@ export const figuresSlice = createSlice({
   name: 'figures',
   initialState,
   reducers: {
-    // move: (state, action: PayloadAction<{ id: string, position: { x: number, y: number } }>) => {
-    //   const figure = state.findIndex(figure => figure.id === action.payload.id)
-    // //   state[figure] = { ...state[figure], position: action.payload.position }
-    // },
+    move: (state, action:PayloadAction<{id: string, position: [number, number, number]}>) => {
+      const figure = state.findIndex(figure => figure.id === action.payload.id)
+      state[figure] = { ...state[figure], position: action.payload.position }
+    }
   },
 })
+
+export const { move } = figuresSlice.actions

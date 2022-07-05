@@ -5,6 +5,7 @@ import { Board } from './components/Board/Board'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { selectFigure } from './store/selectedSlice'
 import { getAvailableMoves, resetMoves } from './store/movesSlice'
+import { move } from './store/figuresSlice'
 
 function App() {
 
@@ -18,7 +19,12 @@ function App() {
     dispatch(resetMoves())
     dispatch(selectFigure(id))
     dispatch(getAvailableMoves({ id, position }))
+  }
 
+  const onFigureMove = (id: string, position: [number, number, number]) => {
+    dispatch(move({ id, position }))
+    dispatch(resetMoves())
+    dispatch(selectFigure(''))
   }
 
   return (
@@ -43,7 +49,12 @@ function App() {
             />
           )
         })}
-        <Board board={board} availableMoves={availableMoves} />
+        <Board
+          board={board}
+          availableMoves={availableMoves}
+          selectedFigure={selectedFigure}
+          onFigureMove={onFigureMove}
+        />
       </Suspense>
     </Canvas>
   )

@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type initialStateType = {
-  id: string | null
+  id: string
 }
 
 const initialState: initialStateType = {
-  id: null,
+  id: '',
 }
 
 export const selectedSlice = createSlice({
