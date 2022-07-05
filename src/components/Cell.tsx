@@ -12,7 +12,7 @@ const Cell: FC<CellPropsType> = ({color, position}) => {
       scale={[1, 1, 0.1]}
       position={position}
       rotation={[Math.PI / -2, 0, 0]}>
-      <meshStandardMaterial color={color}/>
+      <meshStandardMaterial color={color} />
       <boxGeometry/>
     </mesh>
   )
