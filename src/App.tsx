@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from './store/store'
 import { selectFigure } from './store/selectedSlice'
 import { getAvailableMoves, resetMoves } from './store/movesSlice'
 
-
 function App() {
 
   const dispatch = useAppDispatch()
@@ -21,10 +20,6 @@ function App() {
     dispatch(getAvailableMoves({ id, position }))
 
   }
-  //
-  // useEffect(() => {
-  //
-  // }, [selectedFigure])
 
   return (
     <Canvas style={{ width: '100vw', height: '100vh' }} shadows>
