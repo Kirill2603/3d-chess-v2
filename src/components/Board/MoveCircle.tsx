@@ -16,7 +16,7 @@ export const MoveCircle: FC<MovePropsType> = ({ position, onFigureMove, selected
   return (
     <Cylinder
       onClick={onMoveClick}
-      scale={[0.3, 0.1, 0.3]}
+      scale={[0.35, 0.1, 0.35]}
       position={[position[0], position[1] - 0.35, position[2]]}
     >
       <meshStandardMaterial color='green' />

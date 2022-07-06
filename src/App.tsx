@@ -31,13 +31,13 @@ function App() {
     <Canvas style={{ width: '100vw', height: '100vh' }} shadows>
       <directionalLight
         castShadow
-        position={[2.5, 8, 5]}
-        intensity={1.5}
+        position={[1, 5, 1]}
+        intensity={5.5}
+        receiveShadow
       />
       <OrbitControls />
-      <Environment preset='apartment' background />
       <Suspense fallback={null}>
-        <Environment preset='dawn' background />
+        <Environment preset='forest' background />
         {figures.map(({ Figure, id, color, position }) => {
           return (
             <Figure

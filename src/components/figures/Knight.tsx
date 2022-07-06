@@ -21,10 +21,12 @@ export const Knight: FC<FiguresPropsType> = ({ id, position, color, onFigureSele
 
   return (
     <group
+      rotation={id.includes('W') ? [0, 1.6, 0] : [0, -1.6, 0]}
       onClick={onFigureClick}
       position={position}
       scale={[0.3, 0.3, 0.3]} >
       <mesh
+
         castShadow
         receiveShadow
         geometry={nodes.Cylinder.geometry}
