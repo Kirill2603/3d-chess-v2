@@ -4,16 +4,15 @@ import { Environment, OrbitControls } from '@react-three/drei'
 import { Board } from './components/Board/Board'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { selectFigure } from './store/selectedSlice'
-import { getAvailableMoves, resetMoves } from './store/movesSlice'
-import { move } from './store/figuresSlice'
+import { getAvailableMoves, move, resetMoves } from './store/figuresSlice'
 
 function App() {
 
   const dispatch = useAppDispatch()
   const board = useAppSelector(state => state.board)
-  const figures = useAppSelector(state => state.figures)
+  const figures = useAppSelector(state => state.figures.figures)
   const selectedFigure = useAppSelector(state => state.selectedFigure.id)
-  const availableMoves = useAppSelector(state => state.moves.availableMoves)
+  const availableMoves = useAppSelector(state => state.figures.availableMoves)
 
   const onFigureSelect = (id: string, position: [number, number, number]) => {
     dispatch(resetMoves())
