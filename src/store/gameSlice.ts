@@ -24,7 +24,6 @@ interface FigureType {
 
 type initialStateType = {
   figures: FigureType[],
-  board: Array<FigureType[] | {}>
 }
 
 // const board: Array<FigureType[] | {}> = [
