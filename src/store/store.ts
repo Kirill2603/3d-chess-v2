@@ -1,19 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { boardSlice } from './boardSlice'
-import { figuresSlice } from './figuresSlice'
-import { selectedSlice } from './selectedSlice'
+import {gameSlice} from "./gameSlice";
 
 export const store = configureStore({
   reducer: {
-    board: boardSlice.reducer,
-    figures: figuresSlice.reducer,
-    selectedFigure: selectedSlice.reducer,
-  },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+    game: gameSlice.reducer
+  }
 });
 
 export type AppDispatch = typeof store.dispatch
