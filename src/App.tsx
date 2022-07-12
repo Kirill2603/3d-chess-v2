@@ -3,15 +3,11 @@ import { useAppSelector } from './store/store'
 
 function App() {
 
-  const { board } = useAppSelector(state => state.game)
+  const { figures } = useAppSelector(state => state.game)
 
   return (
    <div>
-     {board.map((row) => {
-       return (
-         row.map
-       )
-     })}
+
    </div>
   )
 }
