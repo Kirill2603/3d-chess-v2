@@ -14,109 +14,95 @@ enum Figures {
   ROOK = 'rook',
 }
 
-interface FigureType {
-  id: string,
-  x: number,
-  y: number,
-  color: Colors,
-  Figure: Figures
-}
 
 type initialStateType = {
-  figures: FigureType[],
+  board: Array<Array<{ x: number, y: number, figure?: Figures, color?: Colors }>>
 }
 
-// const board: Array<FigureType[] | {}> = [
-//   [
-//     { id: 'WCastle1', x: 0, y: 0, color: Colors.WHITE, Figure: Figures.CASTLE },
-//     { id: 'WCastle2', x: 7, y: 0, color: Colors.WHITE, Figure: Figures.CASTLE },
-//     { id: 'WKnight1', x: 1, y: 0, color: Colors.WHITE, Figure: Figures.KNIGHT },
-//     { id: 'WKnight2', x: 6, y: 0, color: Colors.WHITE, Figure: Figures.KNIGHT },
-//     { id: 'WRook1', x: 2, y: 0, color: Colors.WHITE, Figure: Figures.ROOK },
-//     { id: 'WRook2', x: 5, y: 0, color: Colors.WHITE, Figure: Figures.ROOK },
-//     { id: 'WKing', x: 4, y: 0, color: Colors.WHITE, Figure: Figures.KING },
-//     { id: 'WQueen', x: 3, y: 0, color: Colors.WHITE, Figure: Figures.QUEEN },
-//   ],
-//   [
-//     { id: 'WPawn1', x: 0, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//     { id: 'WPawn2', x: 1, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//     { id: 'WPawn3', x: 2, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//     { id: 'WPawn4', x: 3, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//     { id: 'WPawn5', x: 4, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//     { id: 'WPawn6', x: 5, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//     { id: 'WPawn7', x: 6, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//     { id: 'WPawn8', x: 7, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-//   ],
-//   [
-//     {},{},{},{},{},{},{},{}
-//   ],
-//   [
-//     {},{},{},{},{},{},{},{}
-//   ],
-//   [
-//     {},{},{},{},{},{},{},{}
-//   ],
-//   [
-//     {},{},{},{},{},{},{},{}
-//   ],
-//   [
-//     { id: 'BPawn1', x: 0, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//     { id: 'BPawn2', x: 1, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//     { id: 'BPawn3', x: 2, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//     { id: 'BPawn4', x: 3, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//     { id: 'BPawn5', x: 4, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//     { id: 'BPawn6', x: 5, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//     { id: 'BPawn7', x: 6, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//     { id: 'BPawn8', x: 7, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-//   ],
-//   [
-//     { id: 'BCastle1', x: 0, y: 7, color: Colors.BLACK, Figure: Figures.CASTLE },
-//     { id: 'BCastle2', x: 7, y: 7, color: Colors.BLACK, Figure: Figures.CASTLE },
-//     { id: 'BKnight1', x: 1, y: 7, color: Colors.BLACK, Figure: Figures.KNIGHT },
-//     { id: 'BKnight2', x: 6, y: 7, color: Colors.BLACK, Figure: Figures.KNIGHT },
-//     { id: 'BRook1', x: 2, y: 7, color: Colors.BLACK, Figure: Figures.ROOK },
-//     { id: 'BRook2', x: 5, y: 7, color: Colors.BLACK, Figure: Figures.ROOK },
-//     { id: 'BKing', x: 4, y: 7, color: Colors.BLACK, Figure: Figures.KING },
-//     { id: 'BQueen', x: 3, y: 7, color: Colors.BLACK, Figure: Figures.QUEEN },
-//   ],
-// ]
-
 const initialState: initialStateType = {
-  figures: [
-    { id: 'WPawn1', x: 0, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WPawn2', x: 1, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WPawn3', x: 2, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WPawn4', x: 3, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WPawn5', x: 4, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WPawn6', x: 5, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WPawn7', x: 6, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WPawn8', x: 7, y: 1, color: Colors.WHITE, Figure: Figures.PAWN },
-    { id: 'WCastle1', x: 0, y: 0, color: Colors.WHITE, Figure: Figures.CASTLE },
-    { id: 'WCastle2', x: 7, y: 0, color: Colors.WHITE, Figure: Figures.CASTLE },
-    { id: 'WKnight1', x: 1, y: 0, color: Colors.WHITE, Figure: Figures.KNIGHT },
-    { id: 'WKnight2', x: 6, y: 0, color: Colors.WHITE, Figure: Figures.KNIGHT },
-    { id: 'WRook1', x: 2, y: 0, color: Colors.WHITE, Figure: Figures.ROOK },
-    { id: 'WRook2', x: 5, y: 0, color: Colors.WHITE, Figure: Figures.ROOK },
-    { id: 'WKing', x: 4, y: 0, color: Colors.WHITE, Figure: Figures.KING },
-    { id: 'WQueen', x: 3, y: 0, color: Colors.WHITE, Figure: Figures.QUEEN },
-
-    { id: 'BPawn1', x: 0, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BPawn2', x: 1, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BPawn3', x: 2, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BPawn4', x: 3, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BPawn5', x: 4, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BPawn6', x: 5, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BPawn7', x: 6, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BPawn8', x: 7, y: 6, color: Colors.BLACK, Figure: Figures.PAWN },
-    { id: 'BCastle1', x: 0, y: 7, color: Colors.BLACK, Figure: Figures.CASTLE },
-    { id: 'BCastle2', x: 7, y: 7, color: Colors.BLACK, Figure: Figures.CASTLE },
-    { id: 'BKnight1', x: 1, y: 7, color: Colors.BLACK, Figure: Figures.KNIGHT },
-    { id: 'BKnight2', x: 6, y: 7, color: Colors.BLACK, Figure: Figures.KNIGHT },
-    { id: 'BRook1', x: 2, y: 7, color: Colors.BLACK, Figure: Figures.ROOK },
-    { id: 'BRook2', x: 5, y: 7, color: Colors.BLACK, Figure: Figures.ROOK },
-    { id: 'BKing', x: 4, y: 7, color: Colors.BLACK, Figure: Figures.KING },
-    { id: 'BQueen', x: 3, y: 7, color: Colors.BLACK, Figure: Figures.QUEEN },
+  board: [
+  [
+    { x: 0, y: 0, figure: Figures.CASTLE, color: Colors.WHITE },
+    { x: 0, y: 1, figure: Figures.KNIGHT, color: Colors.WHITE },
+    { x: 0, y: 2, figure: Figures.ROOK, color: Colors.WHITE },
+    { x: 0, y: 3, figure: Figures.QUEEN, color: Colors.WHITE },
+    { x: 0, y: 4, figure: Figures.KING, color: Colors.WHITE },
+    { x: 0, y: 5, figure: Figures.ROOK, color: Colors.WHITE },
+    { x: 0, y: 6, figure: Figures.KNIGHT, color: Colors.WHITE },
+    { x: 0, y: 7, figure: Figures.CASTLE, color: Colors.WHITE },
   ],
+  [
+    { x: 1, y: 0, figure: Figures.PAWN, color: Colors.WHITE },
+    { x: 1, y: 1, figure: Figures.PAWN, color: Colors.WHITE },
+    { x: 1, y: 2, figure: Figures.PAWN, color: Colors.WHITE },
+    { x: 1, y: 3, figure: Figures.PAWN, color: Colors.WHITE },
+    { x: 1, y: 4, figure: Figures.PAWN, color: Colors.WHITE },
+    { x: 1, y: 5, figure: Figures.PAWN, color: Colors.WHITE },
+    { x: 1, y: 6, figure: Figures.PAWN, color: Colors.WHITE },
+    { x: 1, y: 7, figure: Figures.PAWN, color: Colors.WHITE },
+  ],
+  [
+    { x: 2, y: 0 },
+    { x: 2, y: 1 },
+    { x: 2, y: 2 },
+    { x: 2, y: 3 },
+    { x: 2, y: 4 },
+    { x: 2, y: 5 },
+    { x: 2, y: 6 },
+    { x: 2, y: 7 },
+  ],
+  [
+    { x: 3, y: 0 },
+    { x: 3, y: 1 },
+    { x: 3, y: 2 },
+    { x: 3, y: 3 },
+    { x: 3, y: 4 },
+    { x: 3, y: 5 },
+    { x: 3, y: 6 },
+    { x: 3, y: 7 },
+  ],
+  [
+    { x: 4, y: 0 },
+    { x: 4, y: 1 },
+    { x: 4, y: 2 },
+    { x: 4, y: 3 },
+    { x: 4, y: 4 },
+    { x: 4, y: 5 },
+    { x: 4, y: 6 },
+    { x: 4, y: 7 },
+  ],
+  [
+    { x: 5, y: 0 },
+    { x: 5, y: 1 },
+    { x: 5, y: 2 },
+    { x: 5, y: 3 },
+    { x: 5, y: 4 },
+    { x: 5, y: 5 },
+    { x: 5, y: 6 },
+    { x: 5, y: 7 },
+  ],
+  [
+    { x: 6, y: 0, figure: Figures.PAWN, color: Colors.BLACK },
+    { x: 6, y: 1, figure: Figures.PAWN, color: Colors.BLACK },
+    { x: 6, y: 2, figure: Figures.PAWN, color: Colors.BLACK },
+    { x: 6, y: 3, figure: Figures.PAWN, color: Colors.BLACK },
+    { x: 6, y: 4, figure: Figures.PAWN, color: Colors.BLACK },
+    { x: 6, y: 5, figure: Figures.PAWN, color: Colors.BLACK },
+    { x: 6, y: 6, figure: Figures.PAWN, color: Colors.BLACK },
+    { x: 6, y: 7, figure: Figures.PAWN, color: Colors.BLACK },
+  ],
+  [
+    { x: 7, y: 0, figure: Figures.CASTLE, color: Colors.BLACK },
+    { x: 7, y: 1, figure: Figures.KNIGHT, color: Colors.BLACK },
+    { x: 7, y: 2, figure: Figures.ROOK, color: Colors.BLACK },
+    { x: 7, y: 3, figure: Figures.QUEEN, color: Colors.BLACK },
+    { x: 7, y: 4, figure: Figures.KING, color: Colors.BLACK },
+    { x: 7, y: 5, figure: Figures.ROOK, color: Colors.BLACK },
+    { x: 7, y: 6, figure: Figures.KNIGHT, color: Colors.BLACK },
+    { x: 7, y: 7, figure: Figures.CASTLE, color: Colors.BLACK },
+  ],
+
+]
 }
 
 export const gameSlice = createSlice({
