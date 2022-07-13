@@ -1,14 +1,24 @@
-import React from 'react'
-import { useAppSelector } from './store/store'
+import React, { useEffect, useState } from 'react'
+import { Chess } from 'chess.js'
+import { Cell } from './components/Cell'
+import { BoardDesk } from './components/BoardDesk'
 
 function App() {
 
-  const { figures } = useAppSelector(state => state.game)
+  const chess = new Chess()
+  const board = chess.board()
+  const [moves, setMoves] = useState<string[]>([])
+
+  // useEffect(() => {
+  //   setMoves(chess.moves({square: selected}))
+  // }, [selected])
+
+  console.log(chess.board())
 
   return (
-   <div>
-
-   </div>
+    <>
+      <BoardDesk />
+    </>
   )
 }
 
