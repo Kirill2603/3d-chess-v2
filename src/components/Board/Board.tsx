@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 
 import { MoveCircle } from './MoveCircle'
 import { Cell } from './Cell'
-import { AttackCircle } from './AttacCircle'
 
 type BoardPropsType = {
   board: Array<{
@@ -11,13 +10,12 @@ type BoardPropsType = {
     color: 'white' | 'black'
   }>,
   selectedFigure: string ,
-  attackMoves: Array<[number, number, number]> | [],
   availableMoves: Array<[number, number, number]> | [],
   onFigureMove: (id: string, position: [number, number, number]) => void
 }
 
 
-export const Board: FC<BoardPropsType> = ({board, availableMoves, onFigureMove, selectedFigure, attackMoves}) => {
+export const Board: FC<BoardPropsType> = ({board, availableMoves, onFigureMove, selectedFigure}) => {
 
   return (
     <>
@@ -30,14 +28,6 @@ export const Board: FC<BoardPropsType> = ({board, availableMoves, onFigureMove, 
           selectedFigure={selectedFigure}
           key={move[0].toString() + move[1].toString() + move[2].toString() + Math.random()}
           position={move}/>,
-      )}
-      {attackMoves.map((move) =>
-        <AttackCircle
-          onFigureMove={onFigureMove}
-          selectedFigure={selectedFigure}
-          key={move[0].toString() + move[1].toString() + move[2].toString() + Math.random()}
-          position={move}
-        />
       )}
     </>
   )

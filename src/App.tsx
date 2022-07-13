@@ -1,24 +1,61 @@
-import React, { useEffect, useState } from 'react'
-import { Chess } from 'chess.js'
-import { Cell } from './components/Cell'
-import { BoardDesk } from './components/BoardDesk'
+import React, { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Environment, OrbitControls } from '@react-three/drei'
+import { Board } from './components/Board/Board'
+import { useAppDispatch, useAppSelector } from './store/store'
+import { selectFigure } from './store/selectedSlice'
+import { getAvailableMoves, move, resetMoves } from './store/figuresSlice'
 
 function App() {
 
-  const chess = new Chess()
-  const board = chess.board()
-  const [moves, setMoves] = useState<string[]>([])
+  const dispatch = useAppDispatch()
+  const board = useAppSelector(state => state.board)
+  const figures = useAppSelector(state => state.figures.figures)
+  const selectedFigure = useAppSelector(state => state.selectedFigure.id)
+  const availableMoves = useAppSelector(state => state.figures.availableMoves)
 
-  // useEffect(() => {
-  //   setMoves(chess.moves({square: selected}))
-  // }, [selected])
+  const onFigureSelect = (id: string, position: [number, number, number]) => {
+    dispatch(resetMoves())
+    dispatch(selectFigure(id))
+    dispatch(getAvailableMoves({ id, position }))
+  }
 
-  console.log(chess.board())
+  const onFigureMove = (id: string, position: [number, number, number]) => {
+    dispatch(move({ id, position }))
+    dispatch(resetMoves())
+    dispatch(selectFigure(''))
+  }
 
   return (
-    <>
-      <BoardDesk />
-    </>
+    <Canvas style={{ width: '100vw', height: '100vh' }} shadows>
+      <directionalLight
+        castShadow
+        position={[1, 5, 1]}
+        intensity={5.5}
+        receiveShadow
+      />
+      <OrbitControls />
+      <Suspense fallback={null}>
+        <Environment preset='forest' background />
+        {figures.map(({ Figure, id, color, position }) => {
+          return (
+            <Figure
+              key={id}
+              id={id}
+              color={(id === selectedFigure) ? 'green' : color}
+              position={position}
+              onFigureSelect={onFigureSelect}
+            />
+          )
+        })}
+        <Board
+          board={board}
+          availableMoves={availableMoves}
+          selectedFigure={selectedFigure}
+          onFigureMove={onFigureMove}
+        />
+      </Suspense>
+    </Canvas>
   )
 }
 
