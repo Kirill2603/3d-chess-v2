@@ -17,19 +17,11 @@ export type FigureType = {
 export type BoardStateType = {
   figures: FigureType[],
   availableMoves: Array<[number, number, number]>,
-  beatMoves: Array<[number, number, number]>
+  attackMoves: Array<[number, number, number]>
 }
 
 const initialState: BoardStateType = {
   figures: [
-    { id: 'WPawn1', position: [1, 0, 0], color: 'white', Figure: Pawn },
-    { id: 'WPawn2', position: [1, 0, 1], color: 'white', Figure: Pawn },
-    { id: 'WPawn3', position: [1, 0, 2], color: 'white', Figure: Pawn },
-    { id: 'WPawn4', position: [1, 0, 3], color: 'white', Figure: Pawn },
-    { id: 'WPawn5', position: [1, 0, 4], color: 'white', Figure: Pawn },
-    { id: 'WPawn6', position: [1, 0, 5], color: 'white', Figure: Pawn },
-    { id: 'WPawn7', position: [1, 0, 6], color: 'white', Figure: Pawn },
-    { id: 'WPawn8', position: [1, 0, 7], color: 'white', Figure: Pawn },
     { id: 'WCastle1', position: [0, 0, 7], color: 'white', Figure: Castle },
     { id: 'WCastle2', position: [0, 0, 0], color: 'white', Figure: Castle },
     { id: 'WKnight1', position: [0, 0, 1], color: 'white', Figure: Knight },
@@ -38,6 +30,15 @@ const initialState: BoardStateType = {
     { id: 'WRook2', position: [0, 0, 5], color: 'white', Figure: Rook },
     { id: 'WQueen', position: [0, 0, 3], color: 'white', Figure: Queen },
     { id: 'WKing', position: [0, 0, 4], color: 'white', Figure: King },
+    { id: 'WPawn1', position: [1, 0, 0], color: 'white', Figure: Pawn },
+    { id: 'WPawn2', position: [1, 0, 1], color: 'white', Figure: Pawn },
+    { id: 'WPawn3', position: [1, 0, 2], color: 'white', Figure: Pawn },
+    { id: 'WPawn4', position: [1, 0, 3], color: 'white', Figure: Pawn },
+    { id: 'WPawn5', position: [1, 0, 4], color: 'white', Figure: Pawn },
+    { id: 'WPawn6', position: [1, 0, 5], color: 'white', Figure: Pawn },
+    { id: 'WPawn7', position: [1, 0, 6], color: 'white', Figure: Pawn },
+    { id: 'WPawn8', position: [1, 0, 7], color: 'white', Figure: Pawn },
+
 
     { id: 'BPawn1', position: [6, 0, 0], color: 'black', Figure: Pawn },
     { id: 'BPawn2', position: [6, 0, 1], color: 'black', Figure: Pawn },
@@ -57,7 +58,7 @@ const initialState: BoardStateType = {
     { id: 'BKing', position: [7, 0, 3], color: 'black', Figure: King },
   ],
   availableMoves: [],
-  beatMoves: [],
+  attackMoves: [],
 }
 
 const filterMoves = (moves: Array<[number, number, number]>): Array<[number, number, number]> => {
@@ -68,6 +69,15 @@ const filterMoves = (moves: Array<[number, number, number]>): Array<[number, num
       return move
     }
   })
+}
+
+const filterAttackMoves = (moves: Array<[number, number, number]>, id: string): Array<[number, number, number]> => {
+
+  for (let move in moves) {
+    console.log(move[0])
+  }
+
+  return moves
 }
 
 const knightMovePattern = (position: [number, number, number]): Array<[number, number, number]> => {
@@ -153,6 +163,31 @@ const kingMovePattern = (position: [number, number, number]): Array<[number, num
   return filterMoves(moves)
 }
 
+const pawnMovesPattern = (position: [number, number, number], id: string): Array<[number, number, number]> => {
+  const [x, y, z] = position
+  const moves: Array<[number, number, number]> = []
+  if (id.includes('W')) {
+    if (x === 1) {
+      moves.push([x + 1, y, z], [x + 2, y, z])
+    } else {
+      moves.push([x + 1, y, z])
+    }
+  } else if (id.includes('B')) {
+    if (x === 6) {
+      moves.push([x - 1, y, z], [x - 2, y, z])
+    } else {
+      moves.push([x - 1, y, z])
+    }
+  }
+  return filterMoves(moves)
+}
+
+const pawnAttackPattern = (position: [number, number, number], id: string): Array<[number, number, number]> => {
+  const [x, y, z] = position
+  const attackMoves: Array<[number, number, number]> = [[x + 1, y, z + 1], [x + 1, y, z - 1]]
+  return filterAttackMoves(attackMoves, id)
+}
+
 export const figuresSlice = createSlice({
   name: 'figures',
   initialState,
@@ -164,21 +199,18 @@ export const figuresSlice = createSlice({
     getAvailableMoves: (state, action: PayloadAction<{ id: string | null, position: [number, number, number] }>) => {
 
       if (action.payload.id && action.payload.id.includes('Pawn')) {
-        debugger
-        const [x, y, z] = action.payload.position
-        if (action.payload.id[0] === 'W') {
-          if (x === 1) {
-            state.availableMoves.push([x + 1, y, z], [x + 2, y, z])
-          } else {
-            state.availableMoves.push([x + 1, y, z])
-          }
-        } else if (action.payload.id[0] === 'B') {
-          if (x === 6) {
-            state.availableMoves.push([x - 1, y, z], [x - 2, y, z])
-          } else {
-            state.availableMoves.push([x - 1, y, z])
-          }
-        }
+        // const availableMoves = pawnMovesPattern(action.payload.position, action.payload.id)
+        // const attackMoves = pawnAttackPattern(action.payload.position, action.payload.id)
+        // state.attackMoves = attackMoves
+        // state.availableMoves = availableMoves
+        let [x,y,z] = action.payload.position
+        const id = action.payload.id
+        const moves: Array<[number, number, number]> = []
+        moves.push([x+1,y,z], [x+2,y,z],)
+
+
+        state.availableMoves = moves
+
       }
 
       if (action.payload.id && action.payload.id.includes('King')) {
@@ -206,12 +238,14 @@ export const figuresSlice = createSlice({
         state.availableMoves.push(...availableMoves)
       }
 
-
     },
     resetMoves: (state) => {
       state.availableMoves = []
     },
+    resetAttacks: (state) => {
+      state.attackMoves = []
+    },
   },
 })
 
-export const { move, getAvailableMoves, resetMoves } = figuresSlice.actions
+export const { move, getAvailableMoves, resetMoves, resetAttacks } = figuresSlice.actions

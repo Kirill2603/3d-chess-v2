@@ -4,7 +4,7 @@ import { Environment, OrbitControls } from '@react-three/drei'
 import { Board } from './components/Board/Board'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { selectFigure } from './store/selectedSlice'
-import { getAvailableMoves, move, resetMoves } from './store/figuresSlice'
+import { getAvailableMoves, move, resetAttacks, resetMoves } from './store/figuresSlice'
 
 function App() {
 
@@ -13,6 +13,8 @@ function App() {
   const figures = useAppSelector(state => state.figures.figures)
   const selectedFigure = useAppSelector(state => state.selectedFigure.id)
   const availableMoves = useAppSelector(state => state.figures.availableMoves)
+  const attackMoves = useAppSelector(state => state.figures.attackMoves)
+
 
   const onFigureSelect = (id: string, position: [number, number, number]) => {
     dispatch(resetMoves())
@@ -23,6 +25,7 @@ function App() {
   const onFigureMove = (id: string, position: [number, number, number]) => {
     dispatch(move({ id, position }))
     dispatch(resetMoves())
+    dispatch(resetAttacks())
     dispatch(selectFigure(''))
   }
 
@@ -51,6 +54,7 @@ function App() {
         <Board
           board={board}
           availableMoves={availableMoves}
+          attackMoves={attackMoves}
           selectedFigure={selectedFigure}
           onFigureMove={onFigureMove}
         />
