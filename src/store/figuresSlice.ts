@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type BoardStateType = {
-  figures: any
-  availableMoves: any
+  availableMoves: Array<string>
   beatMoves: any
 }
 
 const initialState: BoardStateType = {
-  figures: [],
   availableMoves: [],
   beatMoves: [],
 }
@@ -19,8 +17,8 @@ export const figuresSlice = createSlice({
     move: (state, action: PayloadAction) => {
 
     },
-    getAvailableMoves: (state, action: PayloadAction) => {
-
+    getAvailableMoves: (state, action: PayloadAction<Array<string>>) => {
+      state.availableMoves = action.payload
     },
     resetMoves: (state) => {
 

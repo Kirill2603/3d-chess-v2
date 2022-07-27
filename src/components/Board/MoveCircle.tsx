@@ -2,22 +2,20 @@ import React, { FC } from 'react'
 import { Cylinder } from '@react-three/drei'
 
 type MovePropsType = {
-  position: [number, number, number],
-  selectedFigure: string ,
-  onFigureMove: (id: string, position: [number, number, number]) => void
+  position: { x: number, y: number },
 }
 
-export const MoveCircle: FC<MovePropsType> = ({ position, onFigureMove, selectedFigure }) => {
+export const MoveCircle: FC<MovePropsType> = ({ position}) => {
 
-  const onMoveClick = () => {
-    onFigureMove(selectedFigure, position)
-  }
+  // const onMoveClick = () => {
+  //   onFigureMove(selectedFigure, position)
+  // }
 
   return (
     <Cylinder
-      onClick={onMoveClick}
+      // onClick={onMoveClick}
       scale={[0.35, 0.1, 0.35]}
-      position={[position[0], position[1] - 0.35, position[2]]}
+      position={[position.x, 0.01, position.y]}
     >
       <meshStandardMaterial color='green' />
     </Cylinder>

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Chess, PieceType, Square } from 'chess.js'
 
-const chess = new Chess()
+export const chess = new Chess()
 
 export type BoardDesk = Array<string[]>
 
@@ -15,8 +15,6 @@ type BoardStateType = {
   board: BoardDesk
   figures: Array<Array< FigureType  | null>>
 }
-
-console.log(chess.board())
 
 const initialState: BoardStateType = {
   board: [
