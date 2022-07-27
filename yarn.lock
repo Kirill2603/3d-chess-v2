@@ -3138,10 +3138,10 @@ check-types@^11.1.1:
   resolved "https://registry.yarnpkg.com/check-types/-/check-types-11.1.2.tgz#86a7c12bf5539f6324eb0e70ca8896c0e38f3e2f"
   integrity sha512-tzWzvgePgLORb9/3a0YenggReLKAIb2owL03H2Xdoe5pKcUyWRSEQ8xfCar8t2SIAuEDwtmx2da1YB52YuHQMQ==
 
-chess.js@^0.13.3:
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/chess.js/-/chess.js-0.13.3.tgz#fae842c87be679e78cfcf2d5f7b8991ad7028caa"
-  integrity sha512-qQnWyoMYvi9nzF7RgtKgqMyS+OhlbCcc2KbWKs1Vo1/r0aKvJfqeFhRUukp7CD3yZhtttt5k0pPjkkbi9ZXxhg==
+chess.js@^0.13.4:
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/chess.js/-/chess.js-0.13.4.tgz#5c67542206cab25690f53de3cf7ff6be602c7aad"
+  integrity sha512-li8pyEtvfw6V7xvVr5aUh8OuICfviWNT3YXPh56/wNZ8yEdqdAaWcWargK6xTmqsWKKH5c1bvdJ7lh5vqNv2wg==
 
 chevrotain@^10.1.2:
   version "10.1.2"

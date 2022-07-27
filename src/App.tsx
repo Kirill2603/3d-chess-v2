@@ -1,24 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { Chess } from 'chess.js'
-import { Cell } from './components/Cell'
-import { BoardDesk } from './components/BoardDesk'
+import React, { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Environment, OrbitControls } from '@react-three/drei'
+import { useAppDispatch, useAppSelector } from './store/store'
+import { Board } from './components/Board/Board'
+import { setSelectCell } from './store/selectedSlice'
+import { chess } from './store/boardSlice'
+import { getAvailableMoves } from './store/figuresSlice'
 
 function App() {
 
-  const chess = new Chess()
-  const board = chess.board()
-  const [moves, setMoves] = useState<string[]>([])
+  const dispatch = useAppDispatch()
+  const { board, figures } = useAppSelector(state => state.board)
+  const { selectedCell } = useAppSelector(state => state.selectedCell)
+  const { availableMoves } = useAppSelector(state => state.figures)
 
-  // useEffect(() => {
-  //   setMoves(chess.moves({square: selected}))
-  // }, [selected])
+  const onCellSelect = (cell: string) => {
+    dispatch(setSelectCell(cell))
+    dispatch(getAvailableMoves(chess.moves({square: cell})))
+  }
 
-  console.log(chess.board())
+  const onFigureMove = () => {
+
+  }
 
   return (
-    <>
-      <BoardDesk />
-    </>
+    <Canvas style={{ width: '100%', height: '100%' }} shadows>
+      <directionalLight
+        castShadow
+        position={[1, 5, 1]}
+        intensity={5.5}
+        receiveShadow
+      />
+      <OrbitControls />
+      <Environment preset='forest' background />
+      <Board board={board} figures={figures} selectedCell={selectedCell} onCellSelect={onCellSelect} availableMoves={availableMoves}/>
+    </Canvas>
   )
 }
 

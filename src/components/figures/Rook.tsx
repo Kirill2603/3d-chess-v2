@@ -11,18 +11,17 @@ type GLTFResult = GLTF & {
   }
 };
 
-export const Rook: FC<FiguresPropsType> = ({ id, position, color, onFigureSelect }): JSX.Element => {
+export const Rook: FC<FiguresPropsType> = ({ position, color, selected }): JSX.Element => {
 
   const { nodes } = useGLTF('figures/rook.gltf') as GLTFResult
 
-  const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
-    onFigureSelect(id, position)
-  }
+  // const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
+  //   onFigureSelect(id, position)
+  // }
 
   return (
     <group
-      onClick={onFigureClick}
-      position={position}
+      position={[position.x, 0.36, position.y]}
       scale={[0.3, 0.3, 0.3]}>
       <mesh
         castShadow
@@ -30,7 +29,7 @@ export const Rook: FC<FiguresPropsType> = ({ id, position, color, onFigureSelect
         geometry={nodes.Cylinder.geometry}
         material={nodes.Cylinder.material}
       >
-        <meshPhysicalMaterial color={color} />
+        <meshPhysicalMaterial color={selected ? 'green' : color === "w" ? 'white' : 'black'} />
       </mesh>
     </group>
   )

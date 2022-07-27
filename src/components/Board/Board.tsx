@@ -1,34 +1,45 @@
 import React, { FC } from 'react'
-
-import { MoveCircle } from './MoveCircle'
+import { BoardDesk, FigureType } from '../../store/boardSlice'
 import { Cell } from './Cell'
+import Figure from './Figure'
+import { MoveCircle } from './MoveCircle'
+
 
 type BoardPropsType = {
-  board: Array<{
-    id: string,
-    position: [number, number, number],
-    color: 'white' | 'black'
-  }>,
-  selectedFigure: string ,
-  availableMoves: Array<[number, number, number]> | [],
-  onFigureMove: (id: string, position: [number, number, number]) => void
+  board: BoardDesk
+  figures: Array<Array<FigureType | null>>
+  selectedCell: string
+  onCellSelect: (cell: string) => void
+  availableMoves: Array<string>
 }
 
-
-export const Board: FC<BoardPropsType> = ({board, availableMoves, onFigureMove, selectedFigure}) => {
+export const Board: FC<BoardPropsType> = ({ board, figures, onCellSelect, selectedCell, availableMoves }) => {
 
   return (
     <>
-      {board.map(cell =>
-        <Cell key={cell.id} position={cell.position} color={cell.color}/>,
-      )}
-      {availableMoves.map((move) =>
-        <MoveCircle
-          onFigureMove={onFigureMove}
-          selectedFigure={selectedFigure}
-          key={move[0].toString() + move[1].toString() + move[2].toString() + Math.random()}
-          position={move}/>,
-      )}
+      {board.map((row, rowIndex) =>
+        <React.Fragment key={rowIndex}>
+          {row.map((cell, cellIndex) =>
+            <Cell
+              availableMoves={availableMoves}
+              onCellSelect={onCellSelect}
+              key={rowIndex.toString() + cellIndex.toString()}
+              cell={cell}
+              color={(cellIndex + rowIndex) % 2 === 0 ? 'white' : 'black'}
+              position={{ x: rowIndex, y: cellIndex }}
+            />,
+          )}
+        </React.Fragment>)}
+      {figures.map((row, rowIndex) =>
+        <React.Fragment key={rowIndex}>
+          {row.map((figure, cellIndex) =>
+            <Figure
+              key={rowIndex.toString() + cellIndex.toString()}
+              position={{ x: rowIndex, y: cellIndex }}
+              selected={!!(figure && figure.square === selectedCell)}
+              figure={figure}
+            />)}
+        </React.Fragment>)}
     </>
   )
 }

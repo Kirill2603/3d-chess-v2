@@ -11,28 +11,22 @@ type GLTFResult = GLTF & {
   }
 };
 
-export const Knight: FC<FiguresPropsType> = ({ id, position, color, onFigureSelect }): JSX.Element => {
+export const Knight: FC<FiguresPropsType> = ({ position, color, selected }): JSX.Element => {
 
   const { nodes } = useGLTF('figures/knight.gltf') as GLTFResult
 
-  const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
-    onFigureSelect(id, position)
-  }
-
   return (
     <group
-      rotation={id.includes('W') ? [0, 1.6, 0] : [0, -1.6, 0]}
-      onClick={onFigureClick}
-      position={position}
-      scale={[0.3, 0.3, 0.3]} >
+      rotation={color === 'b' ? [0, 1.6, 0] : [0, -1.6, 0]}
+      position={[position.x, 0.36, position.y]}
+      scale={[0.3, 0.3, 0.3]}>
       <mesh
-
         castShadow
         receiveShadow
         geometry={nodes.Cylinder.geometry}
         material={nodes.Cylinder.material}
       >
-        <meshPhysicalMaterial color={color} />
+        <meshPhysicalMaterial color={selected ? 'green' : color === "w" ? 'white' : 'black'} />
       </mesh>
     </group>
   )
