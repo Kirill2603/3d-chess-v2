@@ -8,7 +8,7 @@ export const store = configureStore({
   reducer: {
     board: boardSlice.reducer,
     figures: figuresSlice.reducer,
-    selectedFigure: selectedSlice.reducer,
+    selectedCell: selectedSlice.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

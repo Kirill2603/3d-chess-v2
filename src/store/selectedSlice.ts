@@ -1,21 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type initialStateType = {
-  id: string
+  selectedCell: string
 }
 
 const initialState: initialStateType = {
-  id: '',
+  selectedCell: '',
 }
 
 export const selectedSlice = createSlice({
   name: 'selectedFigure',
   initialState,
   reducers: {
-    selectFigure: (state, action: PayloadAction<string>) => {
-        state.id = action.payload
+    setSelectCell: (state, action: PayloadAction<string>) => {
+        state.selectedCell = action.payload
     },
   },
 })
 
-export const { selectFigure } = selectedSlice.actions
+export const { setSelectCell } = selectedSlice.actions

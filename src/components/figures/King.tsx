@@ -11,7 +11,7 @@ type GLTFResult = GLTF & {
   }
 };
 
-export const King: FC<FiguresPropsType> = ({ position, color }): JSX.Element => {
+export const King: FC<FiguresPropsType> = ({ position, color, selected }): JSX.Element => {
 
   const { nodes } = useGLTF('figures/king.gltf') as GLTFResult
 
@@ -25,7 +25,7 @@ export const King: FC<FiguresPropsType> = ({ position, color }): JSX.Element => 
         geometry={nodes.Cylinder.geometry}
         material={nodes.Cylinder.material}
       >
-        <meshPhysicalMaterial color={color === "w" ? 'white' : 'black'} />
+        <meshPhysicalMaterial color={selected ? 'green' : color === "w" ? 'white' : 'black'} />
       </mesh>
     </group>
   )

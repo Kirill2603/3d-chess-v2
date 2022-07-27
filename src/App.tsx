@@ -3,18 +3,19 @@ import { Canvas } from '@react-three/fiber'
 import { Environment, OrbitControls } from '@react-three/drei'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { Board } from './components/Board/Board'
+import { setSelectCell } from './store/selectedSlice'
 
 function App() {
 
   const dispatch = useAppDispatch()
   const { board, figures } = useAppSelector(state => state.board)
-  const selectedFigure = useAppSelector(state => state.selectedFigure.id)
+  const { selectedCell } = useAppSelector(state => state.selectedCell)
   const availableMoves = useAppSelector(state => state.figures.availableMoves)
 
   console.log(figures)
 
-  const onFigureSelect = () => {
-
+  const onCellSelect = (figure: string) => {
+    dispatch(setSelectCell(figure))
   }
 
   const onFigureMove = () => {
@@ -31,7 +32,7 @@ function App() {
       />
       <OrbitControls />
       <Environment preset='forest' background />
-      <Board board={board} figures={figures}/>
+      <Board board={board} figures={figures} selectedCell={selectedCell} onCellSelect={onCellSelect}/>
     </Canvas>
   )
 }

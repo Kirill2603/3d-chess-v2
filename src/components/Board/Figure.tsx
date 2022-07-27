@@ -10,26 +10,27 @@ import { King } from '../figures/King'
 type FigureProps = {
   figure: FigureType  | null
   position: {x: number, y: number}
+  selected: boolean
 }
 
-const Figure: FC<FigureProps> = ({figure, position}) => {
+const Figure: FC<FigureProps> = ({figure, position,selected}) => {
   if (figure && figure.type === 'p') {
-    return <Pawn color={figure.color} position={position}/>
+    return <Pawn color={figure.color} position={position} selected={selected}/>
   }
   if (figure && figure.type === 'n') {
-    return <Knight color={figure.color} position={position}/>
+    return <Knight color={figure.color} position={position} selected={selected}/>
   }
   if (figure && figure.type === 'b') {
-    return <Rook color={figure.color} position={position}/>
+    return <Rook color={figure.color} position={position} selected={selected}/>
   }
   if (figure && figure.type === 'r') {
-    return <Castle color={figure.color} position={position}/>
+    return <Castle color={figure.color} position={position} selected={selected}/>
   }
   if (figure && figure.type === 'q') {
-    return <Queen color={figure.color} position={position}/>
+    return <Queen color={figure.color} position={position} selected={selected}/>
   }
   if (figure && figure.type === 'k') {
-    return <King color={figure.color} position={position}/>
+    return <King color={figure.color} position={position} selected={selected}/>
   }
   return null
 }
