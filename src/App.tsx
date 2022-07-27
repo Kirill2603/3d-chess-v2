@@ -1,33 +1,28 @@
 import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment, OrbitControls } from '@react-three/drei'
-import { Board } from './components/Board/Board'
 import { useAppDispatch, useAppSelector } from './store/store'
-import { selectFigure } from './store/selectedSlice'
-import { getAvailableMoves, move, resetMoves } from './store/figuresSlice'
+import { Board } from './components/Board/Board'
 
 function App() {
 
   const dispatch = useAppDispatch()
-  const board = useAppSelector(state => state.board)
-  const figures = useAppSelector(state => state.figures.figures)
+  const { board, figures } = useAppSelector(state => state.board)
   const selectedFigure = useAppSelector(state => state.selectedFigure.id)
   const availableMoves = useAppSelector(state => state.figures.availableMoves)
 
-  const onFigureSelect = (id: string, position: [number, number, number]) => {
-    dispatch(resetMoves())
-    dispatch(selectFigure(id))
-    dispatch(getAvailableMoves({ id, position }))
+  console.log(figures)
+
+  const onFigureSelect = () => {
+
   }
 
-  const onFigureMove = (id: string, position: [number, number, number]) => {
-    dispatch(move({ id, position }))
-    dispatch(resetMoves())
-    dispatch(selectFigure(''))
+  const onFigureMove = () => {
+
   }
 
   return (
-    <Canvas style={{ width: '100vw', height: '100vh' }} shadows>
+    <Canvas style={{ width: '100%', height: '100%' }} shadows>
       <directionalLight
         castShadow
         position={[1, 5, 1]}
@@ -35,26 +30,8 @@ function App() {
         receiveShadow
       />
       <OrbitControls />
-      <Suspense fallback={null}>
-        <Environment preset='forest' background />
-        {figures.map(({ Figure, id, color, position }) => {
-          return (
-            <Figure
-              key={id}
-              id={id}
-              color={(id === selectedFigure) ? 'green' : color}
-              position={position}
-              onFigureSelect={onFigureSelect}
-            />
-          )
-        })}
-        <Board
-          board={board}
-          availableMoves={availableMoves}
-          selectedFigure={selectedFigure}
-          onFigureMove={onFigureMove}
-        />
-      </Suspense>
+      <Environment preset='forest' background />
+      <Board board={board} figures={figures}/>
     </Canvas>
   )
 }
