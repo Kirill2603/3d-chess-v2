@@ -1,19 +1,26 @@
 import React, { FC } from 'react'
-import { BoardDesk, FigureType } from '../../store/boardSlice'
-import { Cell } from './Cell'
-import Figure from './Figure'
-import { MoveCircle } from './MoveCircle'
-
+import { BoardDesk, FigureType } from '../../../store/boardSlice'
+import Cell from './Cell'
+import Figure from '../Figures/Figure'
+import { Move, Square } from 'chess.js'
 
 type BoardPropsType = {
   board: BoardDesk
   figures: Array<Array<FigureType | null>>
-  selectedCell: string
-  onCellSelect: (cell: string) => void
-  availableMoves: Array<string>
+  selectedCell: Square | null
+  onCellSelect: (cell: Square) => void
+  availableMoves: Array<Move> | []
+  onFigureMove: (targetCell: Square) => void
 }
 
-export const Board: FC<BoardPropsType> = ({ board, figures, onCellSelect, selectedCell, availableMoves }) => {
+const Board: FC<BoardPropsType> = ({
+                                            board,
+                                            figures,
+                                            onCellSelect,
+                                            selectedCell,
+                                            availableMoves,
+                                            onFigureMove,
+                                          }) => {
 
   return (
     <>
@@ -22,6 +29,7 @@ export const Board: FC<BoardPropsType> = ({ board, figures, onCellSelect, select
           {row.map((cell, cellIndex) =>
             <Cell
               availableMoves={availableMoves}
+              onFigureMove={onFigureMove}
               onCellSelect={onCellSelect}
               key={rowIndex.toString() + cellIndex.toString()}
               cell={cell}
@@ -43,3 +51,5 @@ export const Board: FC<BoardPropsType> = ({ board, figures, onCellSelect, select
     </>
   )
 }
+
+export default Board
