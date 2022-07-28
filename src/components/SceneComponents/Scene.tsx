@@ -29,12 +29,12 @@ const Scene = () => {
      <Canvas style={{ width: '100%', height: '100%' }} shadows>
        <directionalLight
          castShadow
-         position={[1, 5, 1]}
-         intensity={5.5}
+         position={[1, 10, 10]}
+         intensity={3.5}
          receiveShadow
        />
        <OrbitControls />
-       <Environment preset='forest' background />
+       <Environment preset='night' background />
        <Board
          board={board}
          figures={figures}

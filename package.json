@@ -49,6 +49,9 @@
   },
   "devDependencies": {
     "@types/three": "^0.141.0",
-    "prettier": "^2.7.1"
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.6"
   }
 }
