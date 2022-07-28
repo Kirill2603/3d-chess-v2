@@ -23,7 +23,7 @@ const Board: FC<BoardPropsType> = ({
                                           }) => {
 
   return (
-    <>
+    <group position={[-3.5,0,-3.5]}>
       {board.map((row, rowIndex) =>
         <React.Fragment key={rowIndex}>
           {row.map((cell, cellIndex) =>
@@ -48,7 +48,7 @@ const Board: FC<BoardPropsType> = ({
               figure={figure}
             />)}
         </React.Fragment>)}
-    </>
+    </group>
   )
 }
 

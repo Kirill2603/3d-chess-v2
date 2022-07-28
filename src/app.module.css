@@ -1,0 +1,6 @@
+.app {
+    @apply h-full w-full flex flex-row p-3
+}
+.appBlock {
+    @apply flex flex-col justify-between w-full
+}
