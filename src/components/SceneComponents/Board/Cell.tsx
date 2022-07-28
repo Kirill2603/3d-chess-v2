@@ -20,9 +20,9 @@ const Cell: FC<CellPropsType> = ({
                                           onFigureMove }) => {
   return (
     <>
-      {availableMoves.map(move => move.to === cell ?
+      {availableMoves.map((move, index) => move.to === cell ?
         <MoveCircle
-          key={cell + 'm'}
+          key={cell + index + 'm'}
           move={move}
           position={position}
           cell={cell}
