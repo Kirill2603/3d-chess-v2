@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { FiguresPropsType } from './types'
-import { ThreeEvent } from '@react-three/fiber'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -11,14 +10,8 @@ type GLTFResult = GLTF & {
   }
 };
 
-export const Rook: FC<FiguresPropsType> = ({ position, color, selected }): JSX.Element => {
-
-  const { nodes } = useGLTF('figures/rook.gltf') as GLTFResult
-
-  // const onFigureClick = (event: ThreeEvent<MouseEvent>) => {
-  //   onFigureSelect(id, position)
-  // }
-
+export const Castle: FC<FiguresPropsType> = ({ position, color, selected}): JSX.Element => {
+  const { nodes } = useGLTF('Figures/castle.gltf') as GLTFResult
   return (
     <group
       position={[position.x, 0.36, position.y]}
@@ -31,8 +24,9 @@ export const Rook: FC<FiguresPropsType> = ({ position, color, selected }): JSX.E
       >
         <meshPhysicalMaterial color={selected ? 'green' : color === "w" ? 'white' : 'black'} />
       </mesh>
+
     </group>
   )
 }
 
-useGLTF.preload('figures/rook.gltf')
+useGLTF.preload('Figures/castle.gltf')

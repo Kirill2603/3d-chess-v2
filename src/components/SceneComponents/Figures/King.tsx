@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { FiguresPropsType } from './types'
-import { ThreeEvent } from '@react-three/fiber'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -11,12 +10,9 @@ type GLTFResult = GLTF & {
   }
 };
 
-export const Pawn: FC<FiguresPropsType> = ({ position, color, selected}): JSX.Element => {
-
-  const { nodes } = useGLTF('figures/pawn.gltf') as GLTFResult
-
+export const King: FC<FiguresPropsType> = ({ position, color, selected }): JSX.Element => {
+  const { nodes } = useGLTF('Figures/king.gltf') as GLTFResult
   return (
-
     <group
       position={[position.x, 0.36, position.y]}
       scale={[0.3, 0.3, 0.3]}>
@@ -28,9 +24,8 @@ export const Pawn: FC<FiguresPropsType> = ({ position, color, selected}): JSX.El
       >
         <meshPhysicalMaterial color={selected ? 'green' : color === "w" ? 'white' : 'black'} />
       </mesh>
-
     </group>
   )
 }
 
-useGLTF.preload('figures/pawn.gltf')
+useGLTF.preload('Figures/king.gltf')
