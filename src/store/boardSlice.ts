@@ -17,7 +17,6 @@ type BoardStateType = {
   selectedCell: Square | null
   availableMoves: Array<Move> | []
 }
-
 const initialState: BoardStateType = {
   board: [
     ['a8', 'b8', 'c8', 'd8', 'e8', 'f8', 'g8', 'h8'],
@@ -39,6 +38,8 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     updateBoard: (state) => {
+      state.selectedCell = null
+      state.availableMoves = []
       state.figures = chess.board()
     },
     setSelectCell: (state, action: PayloadAction<Square>) => {

@@ -13,33 +13,37 @@ const Scene = () => {
 
   const onCellSelect = useCallback((cell: Square) => {
     dispatch(setSelectCell(cell))
-    dispatch(getAvailableMoves(chess.moves({ square: cell, verbose: true })))
-  }, [selectedCell])
+    dispatch(getAvailableMoves(chess.moves({ square: cell, verbose: true, legal: true })))
+  }, [])
 
   const onFigureMove = useCallback((target: Square) => {
     if (selectedCell) {
-      chess.move({ from: selectedCell, to: target })
+      chess.move({ from: selectedCell, to: target, promotion: 'q'})
       dispatch(updateBoard())
     }
   }, [selectedCell])
+
+
   return (
-    <Canvas style={{ width: '100%', height: '100%' }} shadows>
-      <directionalLight
-        castShadow
-        position={[1, 5, 1]}
-        intensity={5.5}
-        receiveShadow
-      />
-      <OrbitControls />
-      <Environment preset='forest' background />
-      <Board
-        board={board}
-        figures={figures}
-        selectedCell={selectedCell}
-        onCellSelect={onCellSelect}
-        availableMoves={availableMoves}
-        onFigureMove={onFigureMove} />
-    </Canvas>
+   <>
+     <Canvas style={{ width: '100%', height: '100%' }} shadows>
+       <directionalLight
+         castShadow
+         position={[1, 5, 1]}
+         intensity={5.5}
+         receiveShadow
+       />
+       <OrbitControls />
+       <Environment preset='forest' background />
+       <Board
+         board={board}
+         figures={figures}
+         selectedCell={selectedCell}
+         onCellSelect={onCellSelect}
+         availableMoves={availableMoves}
+         onFigureMove={onFigureMove} />
+     </Canvas>
+   </>
   )
 }
 
