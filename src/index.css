@@ -5,3 +5,7 @@
 #root {
     @apply w-screen h-screen
 }
+
+body {
+    @apply bg-neutral-500
+}

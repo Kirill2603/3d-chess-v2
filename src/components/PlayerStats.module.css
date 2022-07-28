@@ -1,0 +1,4 @@
+.playerStats {
+    @apply rounded-md bg-neutral-700 text-neutral-100 p-3 h-24
+}
+

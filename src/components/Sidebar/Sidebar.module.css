@@ -1,0 +1,4 @@
+.sidebar {
+    @apply w-96  rounded-md bg-neutral-700 text-neutral-100 ml-3 p-3
+}
+
