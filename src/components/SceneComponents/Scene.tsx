@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { Environment, OrbitControls } from '@react-three/drei'
 import Board from './Board/Board'
-import { Canvas, Camera, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import { Square } from 'chess.js'
 import { chess, getAvailableMoves, setSelectCell, updateBoard } from '../../store/boardSlice'
@@ -15,14 +15,14 @@ const Scene = () => {
     const onCellSelect = useCallback((cell: Square) => {
       dispatch(setSelectCell(cell))
       dispatch(getAvailableMoves(chess.moves({ square: cell, verbose: true, legal: true })))
-    }, [])
+    }, [dispatch])
 
     const onFigureMove = useCallback((target: Square) => {
       if (selectedCell) {
         chess.move({ from: selectedCell, to: target, promotion: 'q' })
         dispatch(updateBoard())
       }
-    }, [selectedCell])
+    }, [selectedCell, dispatch])
 
     return (
       <main className={styles.scene}>
