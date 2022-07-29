@@ -34,7 +34,7 @@ const Cell: FC<CellPropsType> = ({
         scale={[1, 1, 0.1]}
         position={[position.x, 0, position.y]}
         rotation={[Math.PI / -2, 0, 0]}>
-        <meshStandardMaterial color={color} />
+        <meshStandardMaterial roughness={0.1} metalness={0.7} color={color} />
         <boxGeometry />
       </mesh>
     </>

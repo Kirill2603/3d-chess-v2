@@ -16,6 +16,7 @@ type BoardStateType = {
   figures: Array<Array<FigureType | null>>
   selectedCell: Square | null
   availableMoves: Array<Move> | []
+  player: 'w' | 'b'
 }
 const initialState: BoardStateType = {
   board: [
@@ -31,6 +32,7 @@ const initialState: BoardStateType = {
   figures: chess.board(),
   selectedCell: null,
   availableMoves: [],
+  player: 'w'
 }
 
 export const gameSlice = createSlice({
@@ -42,14 +44,25 @@ export const gameSlice = createSlice({
       state.availableMoves = []
       state.figures = chess.board()
     },
-    setSelectCell: (state, action: PayloadAction<Square>) => {
-      state.selectedCell = action.payload
+    moveFigure: (state, action: PayloadAction<{ target: Square }>) => {
+      if (state.selectedCell) {
+        chess.move({ from: state.selectedCell, to: action.payload.target, promotion: 'q' })
+        state.selectedCell = null
+        state.availableMoves = []
+        state.player === 'w' ? state.player = 'b' : state.player = 'w'
+        state.figures = chess.board()
+      }
+
     },
-    getAvailableMoves: (state, action: PayloadAction<Array<Move>>) => {
-      state.availableMoves = action.payload
+    setSelectCell: (state, action: PayloadAction<Square>) => {
+        const colorOfSelectedFigure = chess.get(action.payload)?.color
+        if (colorOfSelectedFigure === state.player) {
+          state.selectedCell = action.payload
+          state.availableMoves = chess.moves({ square: action.payload, verbose: true, legal: true })
+        }
     },
   },
 })
 
-export const { setSelectCell, updateBoard, getAvailableMoves } = gameSlice.actions
+export const { setSelectCell, updateBoard, moveFigure } = gameSlice.actions
 

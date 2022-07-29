@@ -19,16 +19,16 @@ export const MoveCircle: FC<MovePropsType> = ({
   const onMoveClick = (event: ThreeEvent<MouseEvent>) => {
     event.stopPropagation()
     onFigureMove(cell)
-    console.log(move.flags)
   }
 
   return (
     <Cylinder
+      args={[1,1,1,12]}
       onClick={(event) => onMoveClick(event)}
-      scale={[0.5, 0.1, 0.5]}
+      scale={[0.45, 0.1, 0.45]}
       position={[position.x, 0.01, position.y]}
     >
-      <meshStandardMaterial color={move.flags.includes('c') ? 'red' : 'green'} />
+      <meshStandardMaterial transparent={true} opacity={0.8} roughness={0.1} metalness={0.7} color={move.flags.includes('c') ? 'red' : 'green'} />
     </Cylinder>
   )
 }

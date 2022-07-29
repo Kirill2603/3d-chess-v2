@@ -25,7 +25,7 @@ export const Rook: FC<FiguresPropsType> = ({ position, color, selected }): JSX.E
         geometry={nodes.Cylinder.geometry}
         material={nodes.Cylinder.material}
       >
-        <meshPhysicalMaterial color={selected ? 'green' : color === "w" ? 'white' : 'black'} />
+        <meshStandardMaterial roughness={0.1} metalness={0.7} color={selected ? 'green' : color === "w" ? 'white' : 'black'} />
       </mesh>
     </group>
   )
