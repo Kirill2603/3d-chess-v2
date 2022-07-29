@@ -16,28 +16,28 @@ type PlayerStatsProps = {
   history: Array<Move>
 }
 
-const PlayerStats: FC<PlayerStatsProps> = ({ player, activePlayer, history }) => {
-
-  const figureIcon = (piece: PieceType, color: 'w' | 'b') => {
-    if (piece === 'p') {
-      return <PawnIcon fill={color === 'w' ? 'white' : 'black'} />
-    }
-    if (piece === 'n') {
-      return <KnightIcon fill={color === 'w' ? 'white' : 'black'} />
-    }
-    if (piece === 'b') {
-      return <BishopIcon fill={color === 'w' ? 'white' : 'black'} />
-    }
-    if (piece === 'r') {
-      return <RookIcon fill={color === 'w' ? 'white' : 'black'} />
-    }
-    if (piece === 'q') {
-      return <QueenIcon fill={color === 'w' ? 'white' : 'black'} />
-    }
-    if (piece === 'k') {
-      return <KingIcon fill={color === 'w' ? 'white' : 'black'} />
-    }
+export const figureIcon = (piece: PieceType, color: 'w' | 'b') => {
+  if (piece === 'p') {
+    return <PawnIcon fill={color === 'w' ? 'white' : 'black'} />
   }
+  if (piece === 'n') {
+    return <KnightIcon fill={color === 'w' ? 'white' : 'black'} />
+  }
+  if (piece === 'b') {
+    return <BishopIcon fill={color === 'w' ? 'white' : 'black'} />
+  }
+  if (piece === 'r') {
+    return <RookIcon fill={color === 'w' ? 'white' : 'black'} />
+  }
+  if (piece === 'q') {
+    return <QueenIcon fill={color === 'w' ? 'white' : 'black'} />
+  }
+  if (piece === 'k') {
+    return <KingIcon fill={color === 'w' ? 'white' : 'black'} />
+  }
+}
+
+const PlayerStats: FC<PlayerStatsProps> = ({ player, activePlayer, history }) => {
 
   return (
     <div className={player === activePlayer ? styles.active : styles.noActive}>
