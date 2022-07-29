@@ -16,7 +16,10 @@ type BoardStateType = {
   figures: Array<Array<FigureType | null>>
   selectedCell: Square | null
   availableMoves: Array<Move> | []
+  history: Array<Move>
   player: 'w' | 'b'
+  isCheck: boolean
+  isMate: boolean
 }
 const initialState: BoardStateType = {
   board: [
@@ -32,37 +35,37 @@ const initialState: BoardStateType = {
   figures: chess.board(),
   selectedCell: null,
   availableMoves: [],
-  player: 'w'
+  player: 'w',
+  history: chess.history({ verbose: true }),
+  isCheck: chess.in_check(),
+  isMate: chess.game_over(),
 }
 
 export const gameSlice = createSlice({
   name: 'board',
   initialState,
   reducers: {
-    updateBoard: (state) => {
-      state.selectedCell = null
-      state.availableMoves = []
-      state.figures = chess.board()
-    },
     moveFigure: (state, action: PayloadAction<{ target: Square }>) => {
       if (state.selectedCell) {
         chess.move({ from: state.selectedCell, to: action.payload.target, promotion: 'q' })
         state.selectedCell = null
         state.availableMoves = []
+        state.history = chess.history({ verbose: true })
         state.player === 'w' ? state.player = 'b' : state.player = 'w'
+        state.isCheck = chess.in_check()
+        state.isMate = chess.game_over()
         state.figures = chess.board()
       }
-
     },
     setSelectCell: (state, action: PayloadAction<Square>) => {
-        const colorOfSelectedFigure = chess.get(action.payload)?.color
-        if (colorOfSelectedFigure === state.player) {
-          state.selectedCell = action.payload
-          state.availableMoves = chess.moves({ square: action.payload, verbose: true, legal: true })
-        }
+      const colorOfSelectedFigure = chess.get(action.payload)?.color
+      if (colorOfSelectedFigure === state.player) {
+        state.selectedCell = action.payload
+        state.availableMoves = chess.moves({ square: action.payload, verbose: true, legal: true })
+      }
     },
   },
 })
 
-export const { setSelectCell, updateBoard, moveFigure } = gameSlice.actions
+export const { setSelectCell, moveFigure } = gameSlice.actions
 

@@ -1,4 +1,29 @@
 .playerStats {
-    @apply rounded-md bg-neutral-700 text-neutral-100 p-3 h-24
+    @apply flex flex-row justify-start align-middle rounded-md bg-neutral-700 text-neutral-100 p-3 h-24
+    text-lg
 }
 
+.statsWrapper {
+    @apply flex flex-col justify-between px-3
+}
+
+.playerStats >svg {
+    @apply w-fit h-full border-4 border-neutral-500 rounded-lg
+}
+
+
+.w {
+    @apply fill-amber-50
+}
+
+
+.player {
+    @apply px-2
+}
+
+.capturedFigures >ul {
+    @apply flex flex-row
+}
+.figureIco {
+    @apply w-6 h-6
+}

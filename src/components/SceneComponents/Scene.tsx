@@ -9,36 +9,37 @@ import styles from './Scene.module.css'
 
 const Scene = () => {
 
-    const dispatch = useAppDispatch()
-    const { board, figures, selectedCell, availableMoves } = useAppSelector(state => state.game)
+  const dispatch = useAppDispatch()
+  const { board, figures, selectedCell, availableMoves } = useAppSelector(state => state.game)
 
-    const onCellSelect = useCallback((cell: Square) => {
-      dispatch(setSelectCell(cell))
-    }, [dispatch])
+  const onCellSelect = useCallback((cell: Square) => {
+    dispatch(setSelectCell(cell))
+  }, [dispatch])
 
-    const onFigureMove = useCallback((target: Square) => {
-        dispatch(moveFigure({ target }))
-    }, [dispatch])
+  const onFigureMove = useCallback((target: Square) => {
+    dispatch(moveFigure({ target }))
+  }, [dispatch])
 
-    return (
-      <main className={styles.scene}>
-        <Canvas camera={{ fov: 90, position: [6, 4, 4] }}>
-          <directionalLight
-            position={[1, 10, 10]}
-            intensity={3.5}
-          />
-          <OrbitControls autoRotate={true} autoRotateSpeed={0.1} enablePan={false} minDistance={4} maxDistance={10}/>
-          <Environment preset='forest' background  resolution={.01}/>
-          <Board
-            board={board}
-            figures={figures}
-            selectedCell={selectedCell}
-            onCellSelect={onCellSelect}
-            availableMoves={availableMoves}
-            onFigureMove={onFigureMove} />
-        </Canvas>
-      </main>
-    )
-  }
+  return (
+    <main className={styles.scene}>
+      <Canvas camera={{ fov: 90, position: [6, 4, 4] }}>
+        <directionalLight
+          position={[1, 10, 10]}
+          intensity={1.5}
+        />
+        <pointLight position={[4,4,4]}/>
+        <OrbitControls autoRotate={true} autoRotateSpeed={0.1} enablePan={false} minDistance={4} maxDistance={10} />
+        <Environment preset='forest' background resolution={.01} />
+        <Board
+          board={board}
+          figures={figures}
+          selectedCell={selectedCell}
+          onCellSelect={onCellSelect}
+          availableMoves={availableMoves}
+          onFigureMove={onFigureMove} />
+      </Canvas>
+    </main>
+  )
+}
 
-  export default Scene
+export default Scene
