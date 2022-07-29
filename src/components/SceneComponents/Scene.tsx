@@ -18,7 +18,7 @@ const Scene = () => {
 
     const onFigureMove = useCallback((target: Square) => {
         dispatch(moveFigure({ target }))
-    }, [selectedCell, dispatch])
+    }, [dispatch])
 
     return (
       <main className={styles.scene}>
