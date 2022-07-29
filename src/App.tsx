@@ -7,14 +7,14 @@ import { useAppSelector } from './store/store'
 
 function App() {
 
-  const { history, isCheck, isMate } = useAppSelector(state => state.game)
+  const { history, isCheck, isMate, player } = useAppSelector(state => state.game)
 
   return (
     <div className={styles.app}>
       <div className={styles.appBlock}>
-        <PlayerStats player='b' isCheck={isCheck} isMate={isMate} />
+        <PlayerStats player='b' isCheck={isCheck} isMate={isMate} activePlayer={player} history={history}/>
         <Scene />
-        <PlayerStats player='w' isCheck={isCheck} isMate={isMate} />
+        <PlayerStats player='w' isCheck={isCheck} isMate={isMate} activePlayer={player} history={history}/>
       </div>
       <Sidebar history={history}/>
     </div>
