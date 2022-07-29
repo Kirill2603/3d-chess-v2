@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { BoardDesk, FigureType } from '../../../store/boardSlice'
+import { BoardDesk, FigureType } from '../../../store/gameSlice'
 import Cell from './Cell'
 import Figure from '../Figures/Figure'
 import { Move, Square } from 'chess.js'
@@ -14,16 +14,16 @@ type BoardPropsType = {
 }
 
 const Board: FC<BoardPropsType> = ({
-                                            board,
-                                            figures,
-                                            onCellSelect,
-                                            selectedCell,
-                                            availableMoves,
-                                            onFigureMove,
-                                          }) => {
+                                     board,
+                                     figures,
+                                     onCellSelect,
+                                     selectedCell,
+                                     availableMoves,
+                                     onFigureMove,
+                                   }) => {
 
   return (
-    <group position={[-3.5,0,-3.5]}>
+    <group position={[-3.5, 0, -3.5]}>
       {board.map((row, rowIndex) =>
         <React.Fragment key={rowIndex}>
           {row.map((cell, cellIndex) =>

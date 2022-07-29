@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { FigureType } from '../../../store/boardSlice'
+import { FigureType } from '../../../store/gameSlice'
 import { Pawn } from './Pawn'
 import { Knight } from './Knight'
 import { Rook } from './Rook'

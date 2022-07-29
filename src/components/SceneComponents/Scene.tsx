@@ -4,7 +4,7 @@ import Board from './Board/Board'
 import { Canvas } from '@react-three/fiber'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import { Square } from 'chess.js'
-import { chess, getAvailableMoves, setSelectCell, updateBoard } from '../../store/boardSlice'
+import { moveFigure, setSelectCell } from '../../store/gameSlice'
 import styles from './Scene.module.css'
 
 const Scene = () => {
@@ -14,14 +14,10 @@ const Scene = () => {
 
     const onCellSelect = useCallback((cell: Square) => {
       dispatch(setSelectCell(cell))
-      dispatch(getAvailableMoves(chess.moves({ square: cell, verbose: true, legal: true })))
     }, [dispatch])
 
     const onFigureMove = useCallback((target: Square) => {
-      if (selectedCell) {
-        chess.move({ from: selectedCell, to: target, promotion: 'q' })
-        dispatch(updateBoard())
-      }
+        dispatch(moveFigure({ target }))
     }, [selectedCell, dispatch])
 
     return (
@@ -32,7 +28,7 @@ const Scene = () => {
             intensity={3.5}
           />
           <OrbitControls autoRotate={true} autoRotateSpeed={0.1} enablePan={false} minDistance={4} maxDistance={10}/>
-          <Environment preset='sunset' background />
+          <Environment preset='forest' background  resolution={.01}/>
           <Board
             board={board}
             figures={figures}
