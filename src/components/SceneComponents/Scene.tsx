@@ -28,7 +28,7 @@ const Scene = () => {
           intensity={1.5}
         />
         <pointLight position={[4,4,4]}/>
-        <OrbitControls autoRotate={true} autoRotateSpeed={0.1} enablePan={false} minDistance={4} maxDistance={10} />
+        <OrbitControls enablePan={false} minDistance={4} maxDistance={10} />
         <Environment preset='forest' background resolution={.01} />
         <Board
           board={board}
