@@ -3,6 +3,13 @@
     text-lg
 }
 
+.active {
+    @apply border-4 bg-neutral-700 border-green-500 rounded-lg
+}
+.noActive {
+    @apply border-4 bg-neutral-700 border-neutral-700 rounded-lg
+}
+
 .statsWrapper {
     @apply flex flex-col justify-between px-3
 }
@@ -11,11 +18,9 @@
     @apply w-fit h-full border-4 border-neutral-500 rounded-lg
 }
 
-
 .w {
     @apply fill-amber-50
 }
-
 
 .player {
     @apply px-2
@@ -25,5 +30,5 @@
     @apply flex flex-row
 }
 .figureIco {
-    @apply w-6 h-6
+    @apply w-6 h-6 m-0
 }
