@@ -1,7 +1,0 @@
-.scene {
-    @apply h-full w-full py-3
-}
-
-canvas {
-    @apply rounded-lg
-}
