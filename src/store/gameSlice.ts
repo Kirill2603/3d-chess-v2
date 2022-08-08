@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Chess, Move, PieceType, Square } from 'chess.js'
 
-export const chess = new Chess()
+export let chess = new Chess()
 
 export type BoardDesk = Array<Square[]>
 
@@ -16,8 +16,10 @@ type BoardStateType = {
   figures: Array<Array<FigureType | null>>
   selectedCell: Square | null
   availableMoves: Array<Move> | []
+  AiAvailableMoves: Array<string> | []
   history: Array<Move>
-  player: 'w' | 'b'
+  whoseMove: 'w' | 'b'
+  gameType: 'singlePlayer' | 'AI'
   isCheck: boolean
   isMate: boolean
 }
@@ -35,8 +37,10 @@ const initialState: BoardStateType = {
   figures: chess.board(),
   selectedCell: null,
   availableMoves: [],
-  player: 'w',
+  AiAvailableMoves: [],
+  whoseMove: 'w',
   history: chess.history({ verbose: true }),
+  gameType: 'AI',
   isCheck: chess.in_check(),
   isMate: chess.game_over(),
 }
@@ -46,12 +50,25 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     moveFigure: (state, action: PayloadAction<{ target: Square }>) => {
-      if (state.selectedCell) {
+      if (state.selectedCell && state.gameType === 'singlePlayer') {
         chess.move({ from: state.selectedCell, to: action.payload.target, promotion: 'q' })
         state.selectedCell = null
         state.availableMoves = []
         state.history = chess.history({ verbose: true })
-        state.player === 'w' ? state.player = 'b' : state.player = 'w'
+        state.whoseMove === 'w' ? state.whoseMove = 'b' : state.whoseMove = 'w'
+        state.isCheck = chess.in_check()
+        state.isMate = chess.game_over()
+        state.figures = chess.board()
+      }
+      if (state.gameType === 'AI' && state.selectedCell) {
+        chess.move({ from: state.selectedCell, to: action.payload.target, promotion: 'q' })
+        state.selectedCell = null
+        state.availableMoves = []
+        state.history = chess.history({ verbose: true })
+        console.log(chess.moves());
+        state.AiAvailableMoves = chess.moves()
+        const randomMove = Math.floor(Math.random() * state.AiAvailableMoves.length)
+        chess.move(state.AiAvailableMoves[randomMove])
         state.isCheck = chess.in_check()
         state.isMate = chess.game_over()
         state.figures = chess.board()
@@ -59,13 +76,20 @@ export const gameSlice = createSlice({
     },
     setSelectCell: (state, action: PayloadAction<Square>) => {
       const colorOfSelectedFigure = chess.get(action.payload)?.color
-      if (colorOfSelectedFigure === state.player) {
+      if (colorOfSelectedFigure === state.whoseMove) {
         state.selectedCell = action.payload
         state.availableMoves = chess.moves({ square: action.payload, verbose: true, legal: true })
       }
     },
+    setGameType: (state, action: PayloadAction<'singlePlayer' | 'AI'>) => {
+      state.gameType = action.payload
+      chess = new Chess()
+      state.figures = chess.board()
+      state.selectedCell = null
+      state.history =[]
+    }
   },
 })
 
-export const { setSelectCell, moveFigure } = gameSlice.actions
+export const { setSelectCell, moveFigure, setGameType } = gameSlice.actions
 

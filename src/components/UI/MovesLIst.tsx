@@ -13,10 +13,10 @@ import { Move, PieceType } from 'chess.js'
 
 type MovesListProps = {
   history: Move[]
-  player: 'w' | 'b'
+  whoseMove: 'w' | 'b'
 }
 
-export const MovesLIst: FC<MovesListProps> = ({ history, player }) => {
+export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove }) => {
   const figureIco = (piese: PieceType) => {
     if (piese === 'p') {
       return FaChessPawn
@@ -44,7 +44,7 @@ export const MovesLIst: FC<MovesListProps> = ({ history, player }) => {
         w='min'
         px={2}
         roundedTop={'lg'}
-        bgColor={player === 'b' ? 'green.300' : 'gray.400'}
+        bgColor={whoseMove === 'b' ? 'green.300' : 'gray.400'}
         fontSize='4xl'
         fontWeight={'bold'}>
         05:00
@@ -62,8 +62,8 @@ export const MovesLIst: FC<MovesListProps> = ({ history, player }) => {
       <Grid
         gridTemplateColumns={'1fr 3fr 3fr'}
         gridAutoRows={'min-content'}
-        minH='50%'
-        maxH='50%'
+        minH='40vh'
+        maxH='4vh'
         gap={1}
         px={2}
         backgroundColor='gray.500'
@@ -71,9 +71,9 @@ export const MovesLIst: FC<MovesListProps> = ({ history, player }) => {
         justifyContent='start'>
         {history.map((move, index) => {
           return (
-            <React.Fragment key={move.from + move.to + 'i'}>
-              {index % 2 === 0 ? <GridItem>{index / 2 + 1}</GridItem> : null}
-              <GridItem>
+            <React.Fragment key={move.from + move.to + Math.random()}>
+              {index % 2 === 0 ? <GridItem key={move.from + move.to + Math.random()}>{index / 2 + 1}</GridItem> : null}
+              <GridItem key={move.from + move.to + Math.random()}>
                 <Icon as={figureIco(move.piece)} />
                 {move.to}
               </GridItem>
@@ -101,7 +101,7 @@ export const MovesLIst: FC<MovesListProps> = ({ history, player }) => {
         w='min'
         px={2}
         roundedBottom={'lg'}
-        bgColor={player === 'w' ? 'green.300' : 'gray.400'}
+        bgColor={whoseMove === 'w' ? 'green.300' : 'gray.400'}
         fontSize='4xl'
         fontWeight={'bold'}>
         05:00

@@ -6,13 +6,26 @@ import {
   Icon,
   IconButton,
   useColorMode,
+  ButtonGroup,
+  Button,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { FC } from 'react'
 import { FaChessPawn, FaMoon, FaSun } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
+import { setGameType } from 'store/gameSlice'
+import { useAppDispatch } from 'store/store'
 
-export const Header = () => {
+type HeaderProps = {
+  gameType: 'singlePlayer' | 'AI'
+}
+
+export const Header: FC<HeaderProps> = ({ gameType }) => {
   const { colorMode, toggleColorMode } = useColorMode()
+  const dispatch = useAppDispatch()
+
+  const onSetGame = (type: 'singlePlayer' | 'AI') => {
+    dispatch(setGameType(type))
+  }
 
   return (
     <Flex
@@ -27,6 +40,19 @@ export const Header = () => {
         <Heading as='h1' size='xl'>
           3D Chess
         </Heading>
+      </HStack>
+
+      <HStack>
+        <ButtonGroup isAttached>
+          <Button
+            isActive={gameType === 'singlePlayer'}
+            onClick={() => onSetGame('singlePlayer')}>
+            Single
+          </Button>
+          <Button isActive={gameType === 'AI'} onClick={() => onSetGame('AI')}>
+            AI
+          </Button>
+        </ButtonGroup>
       </HStack>
 
       <HStack>
