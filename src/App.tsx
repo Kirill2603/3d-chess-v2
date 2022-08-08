@@ -7,7 +7,7 @@ import { useAppSelector } from 'store/store'
 import Scene from './components/SceneComponents/Scene'
 
 function App() {
-   const { history, isCheck, isMate, player } = useAppSelector(state => state.game)
+   const { history, player } = useAppSelector(state => state.game)
 
   return (
     <Grid
