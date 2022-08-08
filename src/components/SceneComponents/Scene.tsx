@@ -13,6 +13,8 @@ const Scene = () => {
 
   const onCellSelect = useCallback((cell: Square) => {
     dispatch(setSelectCell(cell))
+    console.log(cell);
+    
   }, [dispatch])
 
   const onFigureMove = useCallback((target: Square) => {

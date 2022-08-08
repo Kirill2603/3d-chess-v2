@@ -7,7 +7,7 @@ import { useAppSelector } from 'store/store'
 import Scene from './components/SceneComponents/Scene'
 
 function App() {
-   const { history, player } = useAppSelector(state => state.game)
+   const { history, whoseMove, gameType } = useAppSelector(state => state.game)
 
   return (
     <Grid
@@ -19,10 +19,10 @@ function App() {
       gridTemplateColumns={'3fr 1fr'}
       gap='1'>
       <GridItem area={'header'}>
-        <Header />
+        <Header gameType={gameType}/>
       </GridItem>
       <GridItem area={'movesList'}>
-        <MovesLIst history={history} player={player}/>
+        <MovesLIst history={history} whoseMove={whoseMove}/>
       </GridItem>
       <GridItem area={'main'} borderRadius='md' overflow={'hidden'}>
         <Scene />
