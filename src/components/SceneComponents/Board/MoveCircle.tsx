@@ -23,7 +23,6 @@ export const MoveCircle: FC<MovePropsType> = ({
 
   return (
     <Cylinder
-      args={[1,1,1,12]}
       onClick={(event) => onMoveClick(event)}
       scale={[0.45, 0.1, 0.45]}
       position={[position.x, 0.01, position.y]}

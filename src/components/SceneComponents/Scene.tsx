@@ -20,15 +20,15 @@ const Scene = () => {
   }, [dispatch])
 
   return (
-    <main>
-      <Canvas camera={{ fov: 90, position: [4, 5, -0.5] }} style={{width: '700px', height: '700px'}}>
-        <directionalLight
+    <main style={{width: '100%', height: '100%'}}>
+      <Canvas camera={{ fov: 90, position: [4, 5, -0.5] }} >
+        {/* <directionalLight
           position={[1, 10, 10]}
           intensity={1.5}
-        />
-        <pointLight position={[4,4,4]}/>
+        /> */}
+        {/* <pointLight position={[4,4,4]}/> */}
         <OrbitControls enablePan={false} minDistance={4} maxDistance={10} />
-        <Environment preset='forest' background />
+        <Environment preset='forest' background/>
         <Board
           board={board}
           figures={figures}
