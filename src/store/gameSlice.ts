@@ -65,7 +65,6 @@ export const gameSlice = createSlice({
         state.selectedCell = null
         state.availableMoves = []
         state.history = chess.history({ verbose: true })
-        console.log(chess.moves());
         state.AiAvailableMoves = chess.moves()
         const randomMove = Math.floor(Math.random() * state.AiAvailableMoves.length)
         chess.move(state.AiAvailableMoves[randomMove])

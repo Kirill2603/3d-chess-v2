@@ -14,9 +14,10 @@ import { Move, PieceType } from 'chess.js'
 type MovesListProps = {
   history: Move[]
   whoseMove: 'w' | 'b'
+  isCheck: boolean
 }
 
-export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove }) => {
+export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove, isCheck }) => {
   const figureIco = (piese: PieceType) => {
     if (piese === 'p') {
       return FaChessPawn
@@ -40,6 +41,9 @@ export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove }) => {
 
   return (
     <Flex as='aside' flexDir='column' h='100%' px={2} justify='center'>
+
+      {isCheck && whoseMove === 'b' && <div>Check</div>}
+
       <Text
         w='min'
         px={2}
@@ -51,11 +55,19 @@ export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove }) => {
       </Text>
       <Flex px={2} alignItems='center' bgColor={'gray.400'} roundedTopRight={'lg'}>
         <Icon as={FaUser} mr={1} />
-        <Text fontSize='lg' fontWeight='bold' pr={4}>Player 2</Text>
+        <Text fontSize='lg' fontWeight='bold' pr={4}>
+          Player 2
+        </Text>
         {history.map(
-          moves =>
-            moves.captured &&
-            moves.color === 'b' && <Icon fill='gray.200' as={figureIco(moves.captured)} />,
+          move =>
+            move.captured &&
+            move.color === 'b' && (
+              <Icon
+                key={move.from + move.to + 'ic'}
+                fill='gray.200'
+                as={figureIco(move.captured)}
+              />
+            ),
         )}
       </Flex>
 
@@ -72,7 +84,11 @@ export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove }) => {
         {history.map((move, index) => {
           return (
             <React.Fragment key={move.from + move.to + Math.random()}>
-              {index % 2 === 0 ? <GridItem key={move.from + move.to + Math.random()}>{index / 2 + 1}</GridItem> : null}
+              {index % 2 === 0 ? (
+                <GridItem key={move.from + move.to + Math.random()}>
+                  {index / 2 + 1}
+                </GridItem>
+              ) : null}
               <GridItem key={move.from + move.to + Math.random()}>
                 <Icon as={figureIco(move.piece)} />
                 {move.to}
@@ -89,11 +105,19 @@ export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove }) => {
         roundedBottomRight={'lg'}
         flexWrap='wrap'>
         <Icon as={FaUser} mr={1} />
-        <Text fontSize='lg' fontWeight='bold' pr={4}>Player 1</Text>
+        <Text fontSize='lg' fontWeight='bold' pr={4}>
+          Player 1
+        </Text>
         {history.map(
-          moves =>
-            moves.captured &&
-            moves.color === 'b' && <Icon fill='gray.600' as={figureIco(moves.captured)} />,
+          move =>
+            move.captured &&
+            move.color === 'w' && (
+              <Icon
+                key={move.from + move.to + 'ic'}
+                fill='gray.600'
+                as={figureIco(move.captured)}
+              />
+            ),
         )}
       </Flex>
 
@@ -106,6 +130,9 @@ export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove }) => {
         fontWeight={'bold'}>
         05:00
       </Text>
+
+      {isCheck && whoseMove === 'w' && <div>Check</div>}
+
     </Flex>
   )
 }

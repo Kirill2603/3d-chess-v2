@@ -12,9 +12,7 @@ const Scene = () => {
   const { board, figures, selectedCell, availableMoves } = useAppSelector(state => state.game)
 
   const onCellSelect = useCallback((cell: Square) => {
-    dispatch(setSelectCell(cell))
-    console.log(cell);
-    
+    dispatch(setSelectCell(cell))    
   }, [dispatch])
 
   const onFigureMove = useCallback((target: Square) => {

@@ -29,11 +29,11 @@ const Board: FC<BoardPropsType> = ({
       {board.map((row, rowIndex) => (
         <React.Fragment key={rowIndex}>
           <Text
-            rotation={[1.6, 0, 1.6]}
+            rotation={[-1.6, 0, 1.6]}
             position={[rowIndex, 0, 1]}
             color={'black'}
             fontSize={0.5}
-            children={rowIndex + 1}
+            children={8 - rowIndex}
           />
           {row.map((cell, cellIndex) => (
             <Cell
@@ -51,7 +51,7 @@ const Board: FC<BoardPropsType> = ({
             position={[rowIndex, 0, -8]}
             color={'black'}
             fontSize={0.5}
-            children={rowIndex + 1}
+            children={8 - rowIndex}
           />
         </React.Fragment>
       ))}
