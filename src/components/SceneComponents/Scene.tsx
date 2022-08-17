@@ -9,10 +9,10 @@ import { moveFigure, setSelectCell } from '../../store/gameSlice'
 const Scene = () => {
 
   const dispatch = useAppDispatch()
-  const { board, figures, selectedCell, availableMoves } = useAppSelector(state => state.game)
+  const { board, figures, selectedCell, availableMoves, sceneBackground } = useAppSelector(state => state.game)
 
   const onCellSelect = useCallback((cell: Square) => {
-    dispatch(setSelectCell(cell))    
+    dispatch(setSelectCell(cell))
   }, [dispatch])
 
   const onFigureMove = useCallback((target: Square) => {
@@ -20,15 +20,10 @@ const Scene = () => {
   }, [dispatch])
 
   return (
-    <main style={{width: '100%', height: '100%'}}>
-      <Canvas camera={{ fov: 90, position: [4, 5, -0.5] }} >
-        {/* <directionalLight
-          position={[1, 10, 10]}
-          intensity={1.5}
-        /> */}
-        {/* <pointLight position={[4,4,4]}/> */}
+    <main style={{ width: '100%', height: '100%' }}>
+      <Canvas camera={{ fov: 90, position: [4, 5, -0.5] }}>
         <OrbitControls enablePan={false} minDistance={4} maxDistance={10} />
-        <Environment preset='forest' background/>
+        <Environment preset={sceneBackground} background />
         <Board
           board={board}
           figures={figures}

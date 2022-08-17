@@ -11,6 +11,19 @@ export type FigureType = {
   color: 'b' | 'w'
 }
 
+export type SceneBackgrounds = 
+  'apartment' |  
+  'city' |
+  'dawn' |
+  'forest' |
+  'lobby' |
+  'night' |
+  'park' |
+  'studio' |
+  'sunset' |
+  'warehouse' 
+
+
 type BoardStateType = {
   board: BoardDesk
   figures: Array<Array<FigureType | null>>
@@ -22,7 +35,10 @@ type BoardStateType = {
   gameType: 'singlePlayer' | 'AI'
   isCheck: boolean
   isMate: boolean
+  sceneBackground: SceneBackgrounds
+  
 }
+
 const initialState: BoardStateType = {
   board: [
     ['a8', 'b8', 'c8', 'd8', 'e8', 'f8', 'g8', 'h8'],
@@ -43,6 +59,7 @@ const initialState: BoardStateType = {
   gameType: 'AI',
   isCheck: chess.in_check(),
   isMate: chess.game_over(),
+  sceneBackground: 'sunset',
 }
 
 export const gameSlice = createSlice({
@@ -86,9 +103,20 @@ export const gameSlice = createSlice({
       state.figures = chess.board()
       state.selectedCell = null
       state.history =[]
+      state.whoseMove = 'w'
+    },
+    setSceneBackground: (state, action: PayloadAction<SceneBackgrounds>) => {
+      state.sceneBackground = action.payload
+    },
+    newGame: (state) => {
+      chess = new Chess()
+      state.figures = chess.board()
+      state.selectedCell = null
+      state.history = []
+      state.whoseMove = 'w'
     }
   },
 })
 
-export const { setSelectCell, moveFigure, setGameType } = gameSlice.actions
+export const { setSelectCell, moveFigure, setGameType, setSceneBackground, newGame } = gameSlice.actions
 

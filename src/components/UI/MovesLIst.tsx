@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Flex, Grid, GridItem, Icon, Text } from '@chakra-ui/react'
+import { Button, Flex, Grid, GridItem, Heading, Icon, Text } from '@chakra-ui/react'
 import {
   FaChessBishop,
   FaChessKing,
@@ -10,14 +10,17 @@ import {
   FaUser,
 } from 'react-icons/fa'
 import { Move, PieceType } from 'chess.js'
+import { useAppDispatch } from 'store/store'
+import { newGame } from 'store/gameSlice'
 
 type MovesListProps = {
   history: Move[]
   whoseMove: 'w' | 'b'
   isCheck: boolean
+  isMate: boolean
 }
 
-export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove, isCheck }) => {
+export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove, isCheck, isMate }) => {
   const figureIco = (piese: PieceType) => {
     if (piese === 'p') {
       return FaChessPawn
@@ -37,6 +40,11 @@ export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove, isCheck }) =
     if (piese === 'q') {
       return FaChessQueen
     }
+  }
+
+  const dispatch = useAppDispatch()
+  const onNewGameStart = () => {
+    dispatch(newGame())
   }
 
   return (
@@ -131,8 +139,13 @@ export const MovesLIst: FC<MovesListProps> = ({ history, whoseMove, isCheck }) =
         05:00
       </Text>
 
-      {isCheck && whoseMove === 'w' && <div>Check</div>}
-
+      {isMate &&
+        <Flex direction='column' align='center'>
+          <Heading py='2' size='2xl'>Checkmate!</Heading>
+          <Heading py='2' size='xl'>{whoseMove === 'w' ? 'You win' : 'You losee'}</Heading>
+          <Button onClick={() => onNewGameStart()}>New game?</Button>
+        </Flex>
+      }
     </Flex>
   )
 }
