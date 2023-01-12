@@ -82,7 +82,7 @@ export const Header: FC<HeaderProps> = ({ gameType, sceneBackground }) => {
 
 
       <Menu>
-        <MenuButton>
+        <MenuButton as='div'>
           <IconButton aria-label='asd' icon={<HamburgerIcon />} />
         </MenuButton>
         <MenuList>
