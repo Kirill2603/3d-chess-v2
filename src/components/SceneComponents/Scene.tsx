@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import { Environment, OrbitControls } from '@react-three/drei'
 import Board from './Board/Board'
 import { Canvas } from '@react-three/fiber'
@@ -6,12 +6,10 @@ import { useAppDispatch, useAppSelector } from '../../store/store'
 import { Square } from 'chess.js'
 import { moveFigure, setSelectCell } from '../../store/gameSlice'
 
-// import asd from 'assets/kiara_1_dawn_1k.hdr'
-
 const Scene = () => {
 
   const dispatch = useAppDispatch()
-  const { board, figures, selectedCell, availableMoves, sceneBackground } = useAppSelector(state => state.game)
+  const { board, figures, selectedCell, availableMoves } = useAppSelector(state => state.game)
 
   const onCellSelect = useCallback((cell: Square) => {
     dispatch(setSelectCell(cell))
