@@ -37,16 +37,16 @@ export const Header: FC<HeaderProps> = ({ gameType, sceneBackground }) => {
   }
 
   const sceneBackgrounds: SceneBackgrounds[] = [
-    'apartment',
-    'city',
-    'dawn',
-    'forest',
-    'lobby',
-    'night',
-    'park',
-    'studio',
-    'sunset',
-    'warehouse',
+    'apartment'
+    // 'city',
+    // 'dawn',
+    // 'forest',
+    // 'lobby',
+    // 'night',
+    // 'park',
+    // 'studio',
+    // 'sunset',
+    // 'warehouse',
   ]
 
   const onSetBackground = (background: SceneBackgrounds) => {

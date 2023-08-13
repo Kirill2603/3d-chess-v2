@@ -12,16 +12,16 @@ export type FigureType = {
 }
 
 export type SceneBackgrounds = 
-  'apartment' |  
-  'city' |
-  'dawn' |
-  'forest' |
-  'lobby' |
-  'night' |
-  'park' |
-  'studio' |
-  'sunset' |
-  'warehouse' 
+  'apartment'  
+  // 'city' |
+  // 'dawn' |
+  // 'forest' |
+  // 'lobby' |
+  // 'night' |
+  // 'park' |
+  // 'studio' |
+  // 'sunset' |
+  // 'warehouse' 
 
 
 type BoardStateType = {
@@ -59,7 +59,7 @@ const initialState: BoardStateType = {
   gameType: 'AI',
   isCheck: chess.in_check(),
   isMate: chess.game_over(),
-  sceneBackground: 'sunset',
+  sceneBackground: 'apartment',
 }
 
 export const gameSlice = createSlice({
